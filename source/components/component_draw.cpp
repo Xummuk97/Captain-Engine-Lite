@@ -21,7 +21,7 @@ void ComponentDraw::draw()
 
 ComponentBackLight::ComponentBackLight()
 {
-	//light.SetRadius(300);
+	light.SetRadius(300);
 }
 
 ComponentBackLight::~ComponentBackLight()

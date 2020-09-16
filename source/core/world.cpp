@@ -12,9 +12,9 @@ World::World()
 	cpSpaceSetSleepTimeThreshold(space, 0.5f);
 }
 
-void World::pushEntity(Entity* entity)
+void captain_lite::World::pushLayer(ILayer* layer)
 {
-	push_back(entity);
+	push_back(layer);
 }
 
 cpSpace* World::getSpace()
@@ -31,7 +31,7 @@ void World::update()
 {
 	cpSpaceStep(World::getInstance()->getSpace(), Window::getInstance()->getDeltaTime());
 
-	for (Entity* entity : *this)
+	for (ILayer* entity : *this)
 	{
 		entity->update();
 	}
@@ -39,7 +39,7 @@ void World::update()
 
 void World::draw()
 {
-	for (Entity* entity : *this)
+	for (ILayer* entity : *this)
 	{
 		entity->draw();
 	}

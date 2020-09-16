@@ -1,5 +1,6 @@
 #include "camera.h"
 #include <core/window.h>
+#include <core/resource.h>
 
 using namespace captain_lite;
 
@@ -16,12 +17,19 @@ void Camera::bind(Entity* entity)
 
 void Camera::update()
 {
-	Window::getInstance()->getRenderWindow()->setView(view);
-
 	sf::FloatRect rect = entity->getGlobalBounds();
 	view.setCenter(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
 
 	visible_rect = getVisibleRect();
+
+	background.setPosition(visible_rect.left, visible_rect.top);
+
+	Window::getInstance()->getRenderWindow()->setView(view);
+}
+
+void Camera::draw()
+{
+	Window::getInstance()->getRenderWindow()->draw(background);
 }
 
 sf::FloatRect Camera::getVisibleRect()
@@ -35,4 +43,10 @@ sf::FloatRect Camera::getVisibleRect()
 bool Camera::isVisible(Entity* entity)
 {
 	return visible_rect.intersects(entity->getGlobalBounds());
+}
+
+void Camera::setBackground(const string& texture_name, int x, int y, int width, int height)
+{
+	background.setTexture(Resources::getInstance()->get<ResourceTexture>(texture_name));
+	background.setTextureRect({ x, y, width, height });
 }

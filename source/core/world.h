@@ -1,18 +1,18 @@
 #pragma once
 #include <core/includes.h>
 #include <core/singleton.h>
-#include <core/entity.h>
+#include <core/layer.h>
 #include <core/light_system.h>
 
 namespace captain_lite
 {
-	class World : public Singleton<World>, public list<Entity*>
+	class World : public Singleton<World>, public list<ILayer*>
 	{
 	public:
 		World();
 		virtual ~World() = default;
 
-		void pushEntity(Entity* entity);
+		void pushLayer(ILayer* layer);
 
 		cpSpace* getSpace();
 		LightSystem* getLightSystem();

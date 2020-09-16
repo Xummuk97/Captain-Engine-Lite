@@ -13,12 +13,15 @@ namespace captain_lite
 
 		void bind(Entity* entity);
 		void update();
+		void draw();
 		sf::FloatRect getVisibleRect();
 		bool isVisible(Entity* entity);
+		void setBackground(const string& texture_name, int x, int y, int width, int height);
 
 	private:
 		sf::View view;
 		sf::FloatRect visible_rect;
 		Entity* entity;
+		sf::Sprite background;
 	};
 }

@@ -35,8 +35,10 @@ void Window::exec()
 		Camera::getInstance()->update();
 
 		render_window->clear();
+		Camera::getInstance()->draw();
 		World::getInstance()->draw();
 		render_window->display();
+
 	}
 
 }
