@@ -5,16 +5,20 @@
 
 namespace captain_lite
 {
-	class Entity : public sf::Sprite, public Components<Entity>, public Events<Entity>, public Properties
+	class Entity : public Components<Entity>, public Events<Entity>, public Properties
 	{
 	public:
 		Entity(const string& texture_name, int x, int y, int width, int height);
-		virtual ~Entity() = default;
+		~Entity();
 
 		sf::Vector2f getOriginPosition();
+		sf::FloatRect getGlobalBounds();
 
 		void update();
 		void draw();
 		void drawSprite();
+
+	private:
+		sf::Sprite sprite;
 	};
 }

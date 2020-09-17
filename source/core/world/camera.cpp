@@ -4,13 +4,28 @@
 
 using namespace captain_lite;
 
+Camera::Camera()
+	: Singleton(this)
+{
+}
+
 Camera::Camera(float x, float y, float width, float height)
 	: Singleton(this)
 {
-	view.reset({ x, y, width, height} );
+	reset(x, y, width, height);
 }
 
-void Camera::bind(Entity* entity)
+Camera::Camera(float x, float y, float width, float height, Entity* entity)
+	: Camera(x, y, width, height)
+{
+	bindEntity(entity);
+}
+
+Camera::~Camera()
+{
+}
+
+void Camera::bindEntity(Entity* entity)
 {
 	this->entity = entity;
 }
@@ -24,15 +39,8 @@ void Camera::update()
 
 		visible_rect = getVisibleRect();
 
-		background.setPosition(visible_rect.left, visible_rect.top);
-
-		Window::getInstance()->getRenderWindow()->setView(view);
+		Window::getInstance()->setView(view);
 	}
-}
-
-void Camera::draw()
-{
-	Window::getInstance()->getRenderWindow()->draw(background);
 }
 
 sf::FloatRect Camera::getVisibleRect()
@@ -45,11 +53,15 @@ sf::FloatRect Camera::getVisibleRect()
 
 bool Camera::isVisible(Entity* entity)
 {
-	return visible_rect.intersects(entity->getGlobalBounds());
+	return isVisible(entity->getGlobalBounds());
 }
 
-void Camera::setBackground(const string& texture_name, int x, int y, int width, int height)
+bool Camera::isVisible(const sf::FloatRect& rect)
 {
-	background.setTexture(Resources::getInstance()->get<ResourceTexture>(texture_name));
-	background.setTextureRect({ x, y, width, height });
+	return visible_rect.intersects(rect);
+}
+
+void Camera::reset(float x, float y, float width, float height)
+{
+	view.reset({ x, y, width, height });
 }

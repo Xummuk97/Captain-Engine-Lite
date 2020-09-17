@@ -1,4 +1,5 @@
 #include <core/world/layer.h>
+#include <core/world/camera.h>
 #include <core/window.h>
 
 using namespace captain_lite;
@@ -24,16 +25,21 @@ LayerObjects::LayerObjects(const string& name)
 
 LayerObjects::~LayerObjects()
 {
+	for (Entity* entity : entities)
+	{
+		delete entity;
+	}
+	entities.clear();
 }
 
 void LayerObjects::pushEntity(Entity* entity)
 {
-	push_back(entity);
+	entities.push_back(entity);
 }
 
 void LayerObjects::update()
 {
-	for (Entity* entity : *this)
+	for (Entity* entity : entities)
 	{
 		entity->update();
 	}
@@ -41,7 +47,7 @@ void LayerObjects::update()
 
 void LayerObjects::draw()
 {
-	for (Entity* entity : *this)
+	for (Entity* entity : entities)
 	{
 		entity->draw();
 	}
@@ -63,7 +69,7 @@ LayerChunks::~LayerChunks()
 
 void LayerChunks::pushSprite(const sf::Sprite& sprite)
 {
-	push_back(sprite);
+	sprites.push_back(sprite);
 }
 
 void LayerChunks::update()
@@ -72,9 +78,12 @@ void LayerChunks::update()
 
 void LayerChunks::draw()
 {
-	for (sf::Sprite sprite : *this)
+	for (sf::Sprite sprite : sprites)
 	{
-		Window::getInstance()->getRenderWindow()->draw(sprite);
+		if (Camera::getInstance()->isVisible(sprite.getGlobalBounds()))
+		{
+			Window::getInstance()->draw(sprite);
+		}
 	}
 }
 

@@ -10,14 +10,23 @@ Entity::Entity(const string& texture_name, int x, int y, int width, int height)
 	: Components(this)
 	, Events(this)
 {
-	setTexture(Resources::getInstance()->get<ResourceTexture>(texture_name));
-	setTextureRect({ x, y, width, height });
+	sprite.setTexture(Resources::getInstance()->get<ResourceTexture>(texture_name));
+	sprite.setTextureRect({ x, y, width, height });
+}
+
+Entity::~Entity()
+{
 }
 
 sf::Vector2f Entity::getOriginPosition()
 {
-	sf::FloatRect rect = getGlobalBounds();
+	sf::FloatRect rect = sprite.getGlobalBounds();
 	return { rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f };
+}
+
+sf::FloatRect Entity::getGlobalBounds()
+{
+	return sprite.getGlobalBounds();
 }
 
 void Entity::update()
@@ -34,6 +43,6 @@ void Entity::drawSprite()
 {
 	if (Camera::getInstance()->isVisible(this))
 	{
-		Window::getInstance()->getRenderWindow()->draw(*this);
+		Window::getInstance()->draw(sprite);
 	}
 }

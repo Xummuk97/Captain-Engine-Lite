@@ -16,11 +16,14 @@ public:
 		}
 	}
 
+	~Singleton()
+	{}
+
 	static T* getInstance()
 	{
 		if (!instance)
 		{
-			exit(EXIT_FAILURE);
+			instance = new T;
 		}
 		return instance;
 	}

@@ -10,6 +10,9 @@ namespace captain_lite
 		IComponent()
 		{}
 
+		virtual ~IComponent()
+		{}
+
 		virtual void update() = 0;
 		virtual void draw() = 0;
 
@@ -19,7 +22,7 @@ namespace captain_lite
 		}
 
 	protected:
-		T* object;
+		T* object = nullptr;
 	};
 
 	template<class T>
@@ -30,7 +33,14 @@ namespace captain_lite
 			: object(object)
 		{}
 
-		~Components() = default;
+		~Components()
+		{
+			for (IComponent<T>* component : components)
+			{
+				delete component;
+			}
+			components.clear();
+		}
 
 		void addComponent(IComponent<T>* component)
 		{
@@ -56,6 +66,6 @@ namespace captain_lite
 
 	private:
 		list<IComponent<T>*> components;
-		T* object;
+		T* object = nullptr;
 	};
 }

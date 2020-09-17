@@ -5,14 +5,15 @@
 
 namespace captain_lite
 {
-	class World : public Singleton<World>, public list<ILayer*>
+	class World : public Singleton<World>
 	{
 	public:
 		World();
-		virtual ~World() = default;
+		~World();
 
 		void loadMap(const string& file);
 		void pushLayer(ILayer* layer);
+		void clear();
 
 		cpSpace* getSpace();
 		LightSystem* getLightSystem();
@@ -23,9 +24,10 @@ namespace captain_lite
 	private:
 		void loadMapFromTMX(const string& file);
 
-		cpSpace* space;
+		cpSpace* space = nullptr;
 		LightSystem light_system;
 		sf::Texture texture_map;
 		vector<sf::IntRect> image_rects;
+		list<ILayer*> layers;
 	};
 }

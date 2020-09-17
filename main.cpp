@@ -12,12 +12,12 @@ int main()
     world.loadMap("test.tmx");
 
     Camera camera(0, 0, 800.0f, 600.0f);
-    camera.setBackground("background1", 0, 0, 800, 600);
+
+    Background background("background1", 0, 0, 800, 600);
 
 	Window window("Captain Engine Lite 1.0", 800, 600);
-    sf::RenderWindow* renderWindow = window.getRenderWindow();
-    renderWindow->setFramerateLimit(60);
-    renderWindow->setVerticalSyncEnabled(false);
+    window.setFPSLimit(60);
+    window.setVerticalSyncEnabled(false);
 	window.exec();
 	return EXIT_SUCCESS;
 }

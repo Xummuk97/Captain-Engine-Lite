@@ -7,20 +7,22 @@ namespace captain_lite
 	class Camera : public Singleton<Camera>
 	{
 	public:
+		Camera();
 		Camera(float x, float y, float width, float height);
-		virtual ~Camera() = default;
+		Camera(float x, float y, float width, float height, Entity* entity);
+		~Camera();
 
-		void bind(Entity* entity);
-		void update();
-		void draw();
+		void bindEntity(Entity* entity);
 		sf::FloatRect getVisibleRect();
 		bool isVisible(Entity* entity);
-		void setBackground(const string& texture_name, int x, int y, int width, int height);
+		bool isVisible(const sf::FloatRect& rect);
+		void reset(float x, float y, float width, float height);
+
+		void update();
 
 	private:
 		sf::View view;
 		sf::FloatRect visible_rect;
-		Entity* entity;
-		sf::Sprite background;
+		Entity* entity = nullptr;
 	};
 }

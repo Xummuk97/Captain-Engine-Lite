@@ -14,7 +14,7 @@ namespace captain_lite
 	{
 	public:
 		ILayer(const string& name);
-		~ILayer();
+		virtual ~ILayer();
 
 		virtual void update() = 0;
 		virtual void draw() = 0;
@@ -26,20 +26,23 @@ namespace captain_lite
 		string name;
 	};
 
-	class LayerObjects : public ILayer, public list<Entity*>
+	class LayerObjects : public ILayer
 	{
 	public:
 		LayerObjects(const string& name);
-		virtual ~LayerObjects();
+		~LayerObjects();
 
 		void pushEntity(Entity* entity);
 
 		void update();
 		void draw();
 		LayerType getType();
+
+	private:
+		list<Entity*> entities;
 	};
 
-	class LayerChunks : public ILayer, public vector<sf::Sprite>
+	class LayerChunks : public ILayer
 	{
 	public:
 		LayerChunks(const string& name);
@@ -50,5 +53,8 @@ namespace captain_lite
 		void update();
 		void draw();
 		LayerType getType();
+
+	private:
+		vector<sf::Sprite> sprites;
 	};
 }

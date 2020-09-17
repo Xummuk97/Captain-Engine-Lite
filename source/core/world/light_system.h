@@ -7,13 +7,11 @@ namespace captain_lite
 	{
 	public:
 		LightSystem();
-		~LightSystem() = default;
+		~LightSystem();
 
 		void add(const sfl::Object& object);
 
 		void update(sfl::Light& light);
-
-		void draw(sfl::Light& light);
 		void draw();
 
 	private:

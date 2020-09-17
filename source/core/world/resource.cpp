@@ -2,9 +2,21 @@
 
 using namespace captain_lite;
 
+IResource::IResource()
+{
+}
+
+IResource::~IResource()
+{
+}
+
 ResourceTexture::ResourceTexture(const string& file)
 {
 	loadFromFile("resources/textures/" + file);
+}
+
+ResourceTexture::~ResourceTexture()
+{
 }
 
 ResourceSound::ResourceSound(const string& file)
@@ -15,8 +27,16 @@ ResourceSound::ResourceSound(const string& file)
 	setBuffer(buffer);
 }
 
+ResourceSound::~ResourceSound()
+{
+}
+
 Resources::Resources()
 	: Singleton(this)
+{
+}
+
+Resources::~Resources()
 {
 }
 

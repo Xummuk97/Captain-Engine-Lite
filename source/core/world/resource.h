@@ -9,27 +9,31 @@ namespace captain_lite
 		Sound
 	};
 
-	struct IResource {};
+	struct IResource 
+	{
+		IResource();
+		virtual ~IResource();
+	};
 
-	class ResourceTexture : public sf::Texture, public IResource 
+	class ResourceTexture : public IResource, public sf::Texture
 	{
 	public:
 		ResourceTexture(const string& file);
-		virtual ~ResourceTexture() = default;
+		~ResourceTexture();
 	};
 
-	class ResourceSound : public sf::Sound, public IResource 
+	class ResourceSound : public IResource, public sf::Sound
 	{
 	public:
 		ResourceSound(const string& file);
-		virtual ~ResourceSound() = default;
+		~ResourceSound();
 	};
 
 	class Resources : public Singleton<Resources>
 	{
 	public:
 		Resources();
-		virtual ~Resources() = default;
+		~Resources();
 
 		void add(const string& name, IResource* resource);
 

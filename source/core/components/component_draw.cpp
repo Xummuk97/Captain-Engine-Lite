@@ -1,4 +1,6 @@
 #include <core/components/component_draw.h>
+#include <core/world/light_system.h>
+#include <core/window.h>
 
 using namespace captain_lite;
 
@@ -37,6 +39,6 @@ void ComponentBackLight::update()
 
 void ComponentBackLight::draw()
 {
-	LightSystem::getInstance()->draw(light);
+	Window::getInstance()->draw(light);
 	object->drawSprite();
 }

@@ -1,4 +1,6 @@
 #include <core/world/world.h>
+#include <core/world/camera.h>
+#include <core/world/background.h>
 #include <core/window.h>
 
 using namespace captain_lite;
@@ -10,6 +12,13 @@ World::World()
 	cpSpaceSetIterations(space, 30);
 	cpSpaceSetGravity(space, cpv(0, 9.8f));
 	cpSpaceSetSleepTimeThreshold(space, 0.5f);
+}
+
+World::~World()
+{
+	//delete space;
+
+	clear();
 }
 
 void World::loadMap(const string& file)
@@ -118,9 +127,18 @@ void World::loadMapFromTMX(const string& file)
 	}
 }
 
-void captain_lite::World::pushLayer(ILayer* layer)
+void World::pushLayer(ILayer* layer)
 {
-	push_back(layer);
+	layers.push_back(layer);
+}
+
+void World::clear()
+{
+	for (ILayer* layer : layers)
+	{
+		delete layer;
+	}
+	layers.clear();
 }
 
 cpSpace* World::getSpace()
@@ -137,15 +155,20 @@ void World::update()
 {
 	cpSpaceStep(World::getInstance()->getSpace(), Window::getInstance()->getDeltaTime());
 
-	for (ILayer* entity : *this)
+	for (ILayer* entity : layers)
 	{
 		entity->update();
 	}
+
+	Camera::getInstance()->update();
+	Background::getInstance()->update();
 }
 
 void World::draw()
 {
-	for (ILayer* entity : *this)
+	Background::getInstance()->draw();
+
+	for (ILayer* entity : layers)
 	{
 		entity->draw();
 	}
