@@ -21,15 +21,6 @@ sf::Vector2f Entity::getOriginPosition()
 
 void Entity::update()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		move(-100.0f * Window::getInstance()->getDeltaTime(), 0.0f);
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		move(100.0f * Window::getInstance()->getDeltaTime(), 0.0f);
-	}
-
 	updateComponents();
 }
 

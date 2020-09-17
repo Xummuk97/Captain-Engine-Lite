@@ -23,5 +23,9 @@
 // SFMLLight
 #include <SFMLight.h>
 
+// TinyXML
+#include <tinyxml2/tinyxml2.h>
+
 // Namespaces
 using namespace std;
+using namespace tinyxml2;

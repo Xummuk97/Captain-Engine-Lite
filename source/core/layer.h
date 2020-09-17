@@ -6,11 +6,11 @@ namespace captain_lite
 {
 	enum struct LayerType
 	{
-		Normal,
+		Objects,
 		Chunks
 	};
 
-	class ILayer
+	class ILayer 
 	{
 	public:
 		ILayer(const string& name);
@@ -20,17 +20,32 @@ namespace captain_lite
 		virtual void draw() = 0;
 		virtual LayerType getType() = 0;
 
+		string getName();
+
 	private:
 		string name;
 	};
 
-	class LayerNormal : public ILayer, public list<Entity*>
+	class LayerObjects : public ILayer, public list<Entity*>
 	{
 	public:
-		LayerNormal(const string& name);
-		virtual ~LayerNormal();
+		LayerObjects(const string& name);
+		virtual ~LayerObjects();
 
 		void pushEntity(Entity* entity);
+
+		void update();
+		void draw();
+		LayerType getType();
+	};
+
+	class LayerChunks : public ILayer, public vector<sf::Sprite>
+	{
+	public:
+		LayerChunks(const string& name);
+		~LayerChunks();
+
+		void pushSprite(const sf::Sprite& sprite);
 
 		void update();
 		void draw();

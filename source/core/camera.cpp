@@ -17,14 +17,17 @@ void Camera::bind(Entity* entity)
 
 void Camera::update()
 {
-	sf::FloatRect rect = entity->getGlobalBounds();
-	view.setCenter(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+	if (entity)
+	{
+		sf::FloatRect rect = entity->getGlobalBounds();
+		view.setCenter(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
 
-	visible_rect = getVisibleRect();
+		visible_rect = getVisibleRect();
 
-	background.setPosition(visible_rect.left, visible_rect.top);
+		background.setPosition(visible_rect.left, visible_rect.top);
 
-	Window::getInstance()->getRenderWindow()->setView(view);
+		Window::getInstance()->getRenderWindow()->setView(view);
+	}
 }
 
 void Camera::draw()

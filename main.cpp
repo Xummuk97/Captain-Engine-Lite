@@ -13,18 +13,10 @@ int main()
     resources.add("test", new ResourceTexture("test1.png"));
     
     World world;
-
-    LayerNormal* layer = new LayerNormal("one");
-
-    Entity* entity = new Entity("test", 0, 0, 32, 32);
-    entity->addComponent(new ComponentBackLight);
-    layer->pushEntity(entity);
-
-    world.pushLayer(layer);
+    world.loadMap("test.tmx");
 
     Camera camera(0, 0, 800.0f, 600.0f);
     camera.setBackground("background1", 0, 0, 800, 600);
-    camera.bind(entity);
 
 	Window window("Captain Engine Lite 1.0", 800, 600);
     sf::RenderWindow* renderWindow = window.getRenderWindow();

@@ -12,6 +12,7 @@ namespace captain_lite
 		World();
 		virtual ~World() = default;
 
+		void loadMap(const string& file);
 		void pushLayer(ILayer* layer);
 
 		cpSpace* getSpace();
@@ -21,7 +22,11 @@ namespace captain_lite
 		void draw();
 
 	private:
+		void loadMapFromTMX(const string& file);
+
 		cpSpace* space;
 		LightSystem light_system;
+		sf::Texture texture_map;
+		vector<sf::IntRect> image_rects;
 	};
 }

@@ -1,4 +1,5 @@
 #include "layer.h"
+#include <core/window.h>
 
 using namespace captain_lite;
 
@@ -11,21 +12,26 @@ ILayer::~ILayer()
 {
 }
 
-LayerNormal::LayerNormal(const string& name)
+string ILayer::getName()
+{
+	return name;
+}
+
+LayerObjects::LayerObjects(const string& name)
 	: ILayer(name)
 {
 }
 
-LayerNormal::~LayerNormal()
+LayerObjects::~LayerObjects()
 {
 }
 
-void LayerNormal::pushEntity(Entity* entity)
+void LayerObjects::pushEntity(Entity* entity)
 {
 	push_back(entity);
 }
 
-void LayerNormal::update()
+void LayerObjects::update()
 {
 	for (Entity* entity : *this)
 	{
@@ -33,7 +39,7 @@ void LayerNormal::update()
 	}
 }
 
-void LayerNormal::draw()
+void LayerObjects::draw()
 {
 	for (Entity* entity : *this)
 	{
@@ -41,7 +47,38 @@ void LayerNormal::draw()
 	}
 }
 
-LayerType LayerNormal::getType()
+LayerType LayerObjects::getType()
 {
-	return LayerType::Normal;
+	return LayerType::Objects;
+}
+
+LayerChunks::LayerChunks(const string& name)
+	: ILayer(name)
+{
+}
+
+LayerChunks::~LayerChunks()
+{
+}
+
+void LayerChunks::pushSprite(const sf::Sprite& sprite)
+{
+	push_back(sprite);
+}
+
+void LayerChunks::update()
+{
+}
+
+void LayerChunks::draw()
+{
+	for (sf::Sprite sprite : *this)
+	{
+		Window::getInstance()->getRenderWindow()->draw(sprite);
+	}
+}
+
+LayerType LayerChunks::getType()
+{
+	return LayerType::Chunks;
 }
