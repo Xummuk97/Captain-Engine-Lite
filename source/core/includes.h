@@ -19,6 +19,7 @@
 #include <tinyxml2/tinyxml2.h>
 
 #include <core/singleton.h>
+#include <core/properties.h>
 
 using namespace std;
 using namespace tinyxml2;

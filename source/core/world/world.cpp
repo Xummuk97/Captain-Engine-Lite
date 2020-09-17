@@ -40,24 +40,23 @@ void World::loadMapFromTMX(const string& file)
 	image_map.createMaskFromColor(sf::Color(image->IntAttribute("trans")));
 	texture_map.loadFromImage(image_map);
 
-	int imagewidth = tileset->IntAttribute("width");
-	int imageheight = tileset->IntAttribute("height");
+	int imagewidth = image->IntAttribute("width");
+	int imageheight = image->IntAttribute("height");
 
 	int image_count_x = imagewidth / tilewidth;
 	int image_count_y = imageheight / tileheight;
 
 	image_rects.clear();
 	sf::IntRect rect;
-	for (int y = 0; y <= image_count_y; y++)
+	for (int y = 0; y < image_count_y; y++)
 	{
-		for (int x = 0; x <= image_count_x; x++)
+		for (int x = 0; x < image_count_x; x++)
 		{
 			rect.left = x * tilewidth;
 			rect.top = y * tileheight;
 			rect.width = tilewidth;
 			rect.height = tileheight;
 			image_rects.push_back(rect);
-			cout << rect.left << " " << rect.top << " " << rect.width << " " << rect.height << endl;
 		}
 	}
 

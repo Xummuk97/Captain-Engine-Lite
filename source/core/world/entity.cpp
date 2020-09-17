@@ -8,6 +8,7 @@ using namespace captain_lite;
 
 Entity::Entity(const string& texture_name, int x, int y, int width, int height)
 	: Components(this)
+	, Events(this)
 {
 	setTexture(Resources::getInstance()->get<ResourceTexture>(texture_name));
 	setTextureRect({ x, y, width, height });
