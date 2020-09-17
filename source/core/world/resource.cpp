@@ -1,4 +1,4 @@
-#include "resource.h"
+#include <core/world/resource.h>
 
 using namespace captain_lite;
 

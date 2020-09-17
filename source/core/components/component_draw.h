@@ -1,7 +1,7 @@
 #pragma once
-#include <core/component.h>
-#include <core/entity.h>
-#include <core/light_system.h>
+#include <core/components/component.h>
+#include <core/world/entity.h>
+#include <core/world/light_system.h>
 
 namespace captain_lite
 {

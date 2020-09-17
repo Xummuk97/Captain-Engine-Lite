@@ -1,4 +1,4 @@
-#include "world.h"
+#include <core/world/world.h>
 #include <core/window.h>
 
 using namespace captain_lite;

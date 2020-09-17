@@ -1,4 +1,4 @@
-#include "light_system.h"
+#include <core/world/light_system.h>
 #include <core/window.h>
 
 using namespace captain_lite;

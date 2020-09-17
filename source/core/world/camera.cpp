@@ -1,6 +1,6 @@
-#include "camera.h"
+#include <core/world/camera.h>
 #include <core/window.h>
-#include <core/resource.h>
+#include <core/world/resource.h>
 
 using namespace captain_lite;
 

@@ -1,8 +1,8 @@
-#include "entity.h"
+#include <core/world/entity.h>
 #include <core/window.h>
-#include <core/resource.h>
-#include <core/world.h>
-#include <core/camera.h>
+#include <core/world/resource.h>
+#include <core/world/world.h>
+#include <core/world/camera.h>
 
 using namespace captain_lite;
 

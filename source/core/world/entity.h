@@ -1,6 +1,6 @@
 #pragma once
 #include <core/includes.h>
-#include <core/component.h>
+#include <core/components/component.h>
 
 namespace captain_lite
 {

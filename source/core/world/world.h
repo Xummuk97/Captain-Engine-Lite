@@ -1,8 +1,7 @@
 #pragma once
 #include <core/includes.h>
-#include <core/singleton.h>
-#include <core/layer.h>
-#include <core/light_system.h>
+#include <core/world/layer.h>
+#include <core/world/light_system.h>
 
 namespace captain_lite
 {

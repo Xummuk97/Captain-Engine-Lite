@@ -1,4 +1,4 @@
-#include "component_draw.h"
+#include <core/components/component_draw.h>
 
 using namespace captain_lite;
 

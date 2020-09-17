@@ -1,8 +1,4 @@
-#include <core/resource.h>
-#include <core/world.h>
-#include <core/window.h>
-#include <core/camera.h>
-#include <components/component_draw.h>
+#include <core/core.h>
 
 using namespace captain_lite;
 

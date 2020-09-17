@@ -1,6 +1,5 @@
 #pragma once
 #include <core/includes.h>
-#include <core/singleton.h>
 
 namespace captain_lite
 {
