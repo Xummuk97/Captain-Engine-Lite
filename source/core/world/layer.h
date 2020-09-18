@@ -56,7 +56,7 @@ namespace captain_lite
 
 	private:
 		sf::FloatRect rect_chunk;
-		vector<sf::Sprite> sprites;
+		list<sf::Sprite> sprites;
 	};
 
 	class LayerChunks : public ILayer
@@ -72,6 +72,6 @@ namespace captain_lite
 		LayerType getType();
 
 	private:
-		vector<Chunk*> chunks;
+		list<Chunk*> chunks;
 	};
 }

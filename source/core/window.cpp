@@ -4,8 +4,7 @@
 using namespace captain_lite;
 
 Window::Window()
-	: Singleton(this)
-	, render_window(new sf::RenderWindow(sf::VideoMode(800, 600), "Captain Engine Lite 1.0"))
+	: Window("Captain Engine 1.0", 800, 600)
 {
 }
 
@@ -13,6 +12,7 @@ Window::Window(const string& title, int width, int height)
 	: Singleton(this)
 	, render_window(new sf::RenderWindow(sf::VideoMode(width, height), title))
 {
+	ImGui::SFML::Init(*render_window);
 }
 
 Window::~Window()
@@ -27,6 +27,8 @@ void Window::exec()
 		sf::Event event;
         while (render_window->pollEvent(event))
         {
+			ImGui::SFML::ProcessEvent(event);
+
 			switch (event.type)
 			{
 			case sf::Event::Closed:
@@ -41,12 +43,13 @@ void Window::exec()
 
 		time = clock.restart();
 		deltaTime = time.asSeconds();
+		ImGui::SFML::Update(*render_window, time);
 		World::getInstance()->update();
 
 		render_window->clear();
 		World::getInstance()->draw();
+		ImGui::SFML::Render(*render_window);
 		render_window->display();
-
 	}
 
 }

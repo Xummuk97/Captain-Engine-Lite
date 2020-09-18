@@ -5,7 +5,7 @@
 using namespace captain_lite;
 
 Camera::Camera()
-	: Singleton(this)
+	: Camera(0.0f, 0.0f, 800.0f, 600.0f)
 {
 }
 
