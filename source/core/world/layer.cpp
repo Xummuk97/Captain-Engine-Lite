@@ -18,12 +18,12 @@ string ILayer::getName()
 	return name;
 }
 
-LayerObjects::LayerObjects(const string& name)
+LayerEntities::LayerEntities(const string& name)
 	: ILayer(name)
 {
 }
 
-LayerObjects::~LayerObjects()
+LayerEntities::~LayerEntities()
 {
 	for (Entity* entity : entities)
 	{
@@ -32,12 +32,12 @@ LayerObjects::~LayerObjects()
 	entities.clear();
 }
 
-void LayerObjects::pushEntity(Entity* entity)
+void LayerEntities::pushEntity(Entity* entity)
 {
 	entities.push_back(entity);
 }
 
-void LayerObjects::update()
+void LayerEntities::update()
 {
 	for (Entity* entity : entities)
 	{
@@ -45,7 +45,7 @@ void LayerObjects::update()
 	}
 }
 
-void LayerObjects::draw()
+void LayerEntities::draw()
 {
 	for (Entity* entity : entities)
 	{
@@ -53,7 +53,7 @@ void LayerObjects::draw()
 	}
 }
 
-LayerType LayerObjects::getType()
+LayerType LayerEntities::getType()
 {
 	return LayerType::Objects;
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <map>
+#include <core/properties.h>
 
 using namespace std;
 
@@ -16,21 +17,21 @@ namespace captain_lite
 		~Events()
 		{}
 
-		void bindEvent(const string& name, void(*F)(T* sender))
+		void bindEvent(const string& name, void(*F)(T* sender, Properties* properties))
 		{
 			events[name] = F;
 		}
 		
-		void callEvent(const string& name)
+		void callEvent(const string& name, Properties* properties = nullptr)
 		{
 			if (events.find(name) != events.end())
 			{
-				events[name](sender);
+				events[name](sender, properties);
 			}
 		}
 
 	private:
 		T* sender;
-		map<string, void(*)(T*)> events;
+		map<string, void(*)(T*, Properties*)> events;
 	};
 }

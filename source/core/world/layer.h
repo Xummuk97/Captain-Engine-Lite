@@ -26,11 +26,11 @@ namespace captain_lite
 		string name;
 	};
 
-	class LayerObjects : public ILayer
+	class LayerEntities : public ILayer
 	{
 	public:
-		LayerObjects(const string& name);
-		~LayerObjects();
+		LayerEntities(const string& name);
+		~LayerEntities();
 
 		void pushEntity(Entity* entity);
 

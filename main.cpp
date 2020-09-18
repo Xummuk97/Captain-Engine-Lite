@@ -12,30 +12,26 @@ int main()
 
     World world;
 
-    world.bindEvent(WORLD_EVENT_LOAD_ENTITY, [](World* world)
+    world.bindEvent(WORLD_EVENT_LOAD_ENTITY, [](World* world, Properties* properties)
     {
-        XMLElement* object_element = world->getLastLoadObject();
+        XMLElement* object_element = properties->getPropertyXMLElement("element");
         string object_name = object_element->Attribute("name");
 
         if (object_name == "player")
         {
-            float x = object_element->FloatAttribute("x");
-            float y = object_element->FloatAttribute("y");
+            sf::Vector2f position = Utils::getXmlAttributeVector2f(object_element);
 
             Entity* entity = new Entity("background1", 0, 0, 32, 32);
-            entity->setPosition(x, y);
+            entity->setPosition(position.x, position.y);
             entity->addComponent(new ComponentDraw);
             Camera::getInstance()->bindEntity(entity);
-            world->getEntityLayer(world->getLastLayerName())->pushEntity(entity);
+            world->getEntityLayer(properties->getPropertyString("layer"))->pushEntity(entity);
         }
-        else if (object_name == "collision")
+        else
         {
-            float x = object_element->FloatAttribute("x");
-            float y = object_element->FloatAttribute("y");
-            float width = object_element->FloatAttribute("width");
-            float height = object_element->FloatAttribute("height");
+            sf::FloatRect rect = Utils::getXmlAttributeFloatRect(object_element);
 
-            EntityInfo* entity_info = new EntityInfo({ x, y, width, height });
+            EntityInfo* entity_info = new EntityInfo({ rect.left, rect.top, rect.width, rect.height });
             world->pushEntityInfo(object_name, entity_info);
         }
     });
@@ -48,7 +44,7 @@ int main()
     window.setFPSLimit(60);
     window.setVerticalSyncEnabled(false);
 
-    window.bindEvent(WINDOW_EVENT_GUI, [](Window* window)
+    window.bindEvent(WINDOW_EVENT_GUI, [](Window* window, Properties* properties)
     {
         ImGui::Begin("DEBUG");
         ImGui::Text("fps: %f", 1 / window->getDeltaTime());

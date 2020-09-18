@@ -22,8 +22,7 @@ Background::~Background()
 
 void Background::setTexture(const string& texture_name, int x, int y, int width, int height)
 {
-	sprite.setTexture(Resources::getInstance()->get<ResourceTexture>(texture_name));
-	sprite.setTextureRect({ x, y, width, height });
+	Utils::loadTextureFromResources(texture_name, sprite, x, y, width, height);
 }
 
 void Background::update()

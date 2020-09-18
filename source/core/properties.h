@@ -4,7 +4,10 @@
 #include <map>
 #include <string>
 
+#include <tinyxml2/tinyxml2.h>
+
 using namespace std;
+using namespace tinyxml2;
 
 namespace captain_lite
 {
@@ -17,9 +20,9 @@ namespace captain_lite
 		sf::IntRect intrect_value;
 		sf::FloatRect floatrect_value;
 		string string_value;
+		XMLElement* xmlelement_value;
 
-		PropertyUnion() 
-			: string_value("")
+		PropertyUnion()
 		{}
 
 		~PropertyUnion() {}
@@ -38,6 +41,7 @@ namespace captain_lite
 		void setProperty(const string& name, const sf::Vector2f& value);
 		void setProperty(const string& name, const sf::IntRect& value);
 		void setProperty(const string& name, const sf::FloatRect& value);
+		void setProperty(const string& name, XMLElement* value);
 
 		int getPropertyInt(const string& name);
 		float getPropertyFloat(const string& name);
@@ -46,6 +50,7 @@ namespace captain_lite
 		sf::Vector2f getPropertyVector2f(const string& name);
 		sf::IntRect getPropertyIntRect(const string& name);
 		sf::FloatRect getPropertyFloatRect(const string& name);
+		XMLElement* getPropertyXMLElement(const string& name);
 
 	private:
 		map<string, PropertyUnion> properties;

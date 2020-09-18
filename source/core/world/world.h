@@ -14,14 +14,16 @@ namespace captain_lite
 
 		void loadMap(const string& file);
 		void pushLayer(ILayer* layer);
-		LayerObjects* getEntityLayer(const string& name);
+		LayerEntities* getEntityLayer(const string& name);
 		void pushEntityInfo(const string& name, EntityInfo* entity_info);
 		EntityInfo* getEntityInfo(const string& name);
 		list<EntityInfo*>& getEntitiesInfo(const string& name);
 		void clear();
 
-		XMLElement* getLastLoadObject();
-		string getLastLayerName();
+		int getMapWidth();
+		int getMapHeight();
+		int getTileWidth();
+		int getTileHeight();
 
 		void update();
 		void draw();
@@ -44,7 +46,5 @@ namespace captain_lite
 
 		list<ILayer*> layers;
 		map<string, list<EntityInfo*>> group_entities_info;
-		XMLElement* object_element;
-		string object_layer_name;
 	};
 }

@@ -10,8 +10,7 @@ Entity::Entity(const string& texture_name, int x, int y, int width, int height)
 	: Components(this)
 	, Events(this)
 {
-	sprite.setTexture(Resources::getInstance()->get<ResourceTexture>(texture_name));
-	sprite.setTextureRect({ x, y, width, height });
+	Utils::loadTextureFromResources(texture_name, sprite, x, y, width, height);
 }
 
 Entity::~Entity()

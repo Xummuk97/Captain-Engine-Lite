@@ -131,12 +131,16 @@ void World::loadMapChunksFromTMX(XMLElement* element, const string& layer_name)
 
 void World::loadMapEntitiesFromTMX(XMLElement* element, const string& layer_name)
 {
-	object_element = element->FirstChildElement("object");
-	object_layer_name = layer_name;
+	XMLElement* object_element = element->FirstChildElement("object");
 
 	while (object_element)
 	{
-		callEvent(WORLD_EVENT_LOAD_ENTITY);
+		Properties* properties = new Properties;
+		properties->setProperty("element", object_element);
+		properties->setProperty("layer", layer_name);
+		callEvent(WORLD_EVENT_LOAD_ENTITY, properties);
+		delete properties;
+
 		object_element = object_element->NextSiblingElement();
 	}
 }
@@ -171,17 +175,17 @@ void World::pushLayer(ILayer* layer)
 	layers.push_back(layer);
 }
 
-LayerObjects* World::getEntityLayer(const string& name)
+LayerEntities* World::getEntityLayer(const string& name)
 {
 	for (ILayer* layer : layers)
 	{
 		if (layer->getName() == name)
 		{
-			return (LayerObjects*)layer;
+			return (LayerEntities*)layer;
 		}
 	}
 
-	LayerObjects* layer_objects = new LayerObjects(name);
+	LayerEntities* layer_objects = new LayerEntities(name);
 	pushLayer(layer_objects);
 	return layer_objects;
 }
@@ -227,14 +231,24 @@ list<EntityInfo*>& World::getEntitiesInfo(const string& name)
 	return group_entities_info[name];
 }
 
-XMLElement* World::getLastLoadObject()
+int World::getMapWidth()
 {
-	return object_element;
+	return map_width;
 }
 
-string World::getLastLayerName()
+int World::getMapHeight()
 {
-	return object_layer_name;
+	return map_height;
+}
+
+int World::getTileWidth()
+{
+	return tile_width;
+}
+
+int World::getTileHeight()
+{
+	return tile_height;
 }
 
 void World::update()

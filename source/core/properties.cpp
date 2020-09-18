@@ -45,6 +45,11 @@ void Properties::setProperty(const string& name, const sf::FloatRect& value)
 	properties[name].floatrect_value = value;
 }
 
+void Properties::setProperty(const string& name, XMLElement* value)
+{
+	properties[name].xmlelement_value = value;
+}
+
 int Properties::getPropertyInt(const string& name)
 {
 	return properties[name].int_value;
@@ -78,4 +83,9 @@ sf::IntRect Properties::getPropertyIntRect(const string& name)
 sf::FloatRect Properties::getPropertyFloatRect(const string& name)
 {
 	return properties[name].floatrect_value;
+}
+
+XMLElement* Properties::getPropertyXMLElement(const string& name)
+{
+	return properties[name].xmlelement_value;
 }

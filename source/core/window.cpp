@@ -53,7 +53,6 @@ void Window::exec()
 		ImGui::SFML::Render(*render_window);
 		render_window->display();
 	}
-
 }
 
 float Window::getDeltaTime()
