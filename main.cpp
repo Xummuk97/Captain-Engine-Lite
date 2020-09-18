@@ -4,6 +4,8 @@ using namespace captain_lite;
 
 int main() 
 {
+    cout << Utils::format("Hello, {1}!", "Andrey") << endl;
+
     Resources resources;
     resources.add("background1", new ResourceTexture("background1.jpg"));
     resources.add("test", new ResourceTexture("test1.png"));

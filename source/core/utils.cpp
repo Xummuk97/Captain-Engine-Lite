@@ -24,3 +24,58 @@ void Utils::loadTextureFromResources(const string& texture_name, sf::Sprite& spr
     sprite.setTexture(Resources::getInstance()->get<ResourceTexture>(texture_name));
     sprite.setTextureRect({ x, y, width, height });
 }
+
+string Utils::toString(int x)
+{
+    return to_string(x);
+}
+
+string Utils::toString(unsigned int x)
+{
+    return to_string(x);
+}
+
+string Utils::toString(long x)
+{
+    return to_string(x);
+}
+
+string Utils::toString(unsigned long x)
+{
+    return to_string(x);
+}
+
+string Utils::toString(long long x)
+{
+    return to_string(x);
+}
+
+string Utils::toString(unsigned long long x)
+{
+    return to_string(x);
+}
+
+string Utils::toString(float x)
+{
+    return to_string(x);
+}
+
+string Utils::toString(double x)
+{
+    return to_string(x);
+}
+
+string Utils::toString(long double x)
+{
+    return to_string(x);
+}
+
+string Utils::toString(const char* x)
+{
+    return string(x);
+}
+
+string Utils::toString(const string& x)
+{
+    return x;
+}

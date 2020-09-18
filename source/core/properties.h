@@ -23,6 +23,7 @@ namespace captain_lite
 		XMLElement* xmlelement_value;
 
 		PropertyUnion()
+			: string_value("")
 		{}
 
 		~PropertyUnion() {}
