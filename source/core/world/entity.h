@@ -10,6 +10,8 @@ namespace captain_lite
 		Entity(const string& texture_name, int x, int y, int width, int height);
 		~Entity();
 
+		void setPosition(float x, float y);
+		void move(float x, float y);
 		sf::Vector2f getOriginPosition();
 		sf::FloatRect getGlobalBounds();
 

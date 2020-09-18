@@ -8,18 +8,39 @@ int main()
     resources.add("background1", new ResourceTexture("background1.jpg"));
     resources.add("test", new ResourceTexture("test1.png"));
     
-    World world;
-    world.loadMap("test.tmx");
-
-    LayerObjects* lo = new LayerObjects("test");
-    Entity* e = new Entity("test", 0, 0, 32, 32);
-    e->addComponent(new ComponentDraw);
-    e->addComponent(new ComponentPhysix);
-    lo->pushEntity(e);
-    world.pushLayer(lo);
-
     Camera camera(0, 0, 800.0f, 600.0f);
-    camera.bindEntity(e);
+
+    World world;
+
+    world.bindEvent(WORLD_EVENT_LOAD_ENTITY, [](World* world)
+    {
+        XMLElement* object_element = world->getLastLoadObject();
+        string object_name = object_element->Attribute("name");
+
+        if (object_name == "player")
+        {
+            float x = object_element->FloatAttribute("x");
+            float y = object_element->FloatAttribute("y");
+
+            Entity* entity = new Entity("background1", 0, 0, 32, 32);
+            entity->setPosition(x, y);
+            entity->addComponent(new ComponentDraw);
+            Camera::getInstance()->bindEntity(entity);
+            world->getEntityLayer(world->getLastLayerName())->pushEntity(entity);
+        }
+        else if (object_name == "collision")
+        {
+            float x = object_element->FloatAttribute("x");
+            float y = object_element->FloatAttribute("y");
+            float width = object_element->FloatAttribute("width");
+            float height = object_element->FloatAttribute("height");
+
+            EntityInfo* entity_info = new EntityInfo({ x, y, width, height });
+            world->pushEntityInfo(object_name, entity_info);
+        }
+    });
+
+    world.loadMap("test.tmx");
 
     Background background("background1", 0, 0, 800, 600);
 

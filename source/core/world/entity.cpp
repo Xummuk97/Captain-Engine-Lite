@@ -18,6 +18,17 @@ Entity::~Entity()
 {
 }
 
+void Entity::setPosition(float x, float y)
+{
+	sprite.setPosition(x, y);
+}
+
+void Entity::move(float x, float y)
+{
+	float deltaTime = Window::getInstance()->getDeltaTime();
+	sprite.move(x * deltaTime, y * deltaTime);
+}
+
 sf::Vector2f Entity::getOriginPosition()
 {
 	sf::FloatRect rect = sprite.getGlobalBounds();
@@ -32,15 +43,6 @@ sf::FloatRect Entity::getGlobalBounds()
 void Entity::update()
 {
 	updateComponents();
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		sprite.move(10000.0f * Window::getInstance()->getDeltaTime(), 0.0f);
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		sprite.move(0.0f, 10000.0f * Window::getInstance()->getDeltaTime());
-	}
 }
 
 void Entity::draw()
