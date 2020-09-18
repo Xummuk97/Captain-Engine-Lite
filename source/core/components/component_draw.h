@@ -12,5 +12,6 @@ namespace captain_lite
 
 		void update();
 		void draw();
+		void onInit();
 	};
 }

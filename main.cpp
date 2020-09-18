@@ -13,6 +13,8 @@ int main()
 
     LayerObjects* lo = new LayerObjects("test");
     Entity* e = new Entity("test", 0, 0, 32, 32);
+    e->addComponent(new ComponentDraw);
+    e->addComponent(new ComponentPhysix);
     lo->pushEntity(e);
     world.pushLayer(lo);
 

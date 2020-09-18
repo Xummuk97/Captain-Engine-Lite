@@ -20,4 +20,12 @@ namespace captain_lite
 	private:
 		sf::Sprite sprite;
 	};
+
+	struct EntityInfo : public Properties
+	{
+		sf::FloatRect rect;
+
+		EntityInfo(const sf::FloatRect& rect);
+		~EntityInfo();
+	};
 }

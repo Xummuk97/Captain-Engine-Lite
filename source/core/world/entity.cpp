@@ -55,3 +55,12 @@ void Entity::drawSprite()
 		Window::getInstance()->draw(sprite);
 	}
 }
+
+EntityInfo::EntityInfo(const sf::FloatRect& rect)
+	: rect(rect)
+{
+}
+
+EntityInfo::~EntityInfo()
+{
+}

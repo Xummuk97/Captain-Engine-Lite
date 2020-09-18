@@ -15,6 +15,7 @@ namespace captain_lite
 
 		virtual void update() = 0;
 		virtual void draw() = 0;
+		virtual void onInit() = 0;
 
 		void setObject(T* object)
 		{
@@ -46,6 +47,7 @@ namespace captain_lite
 		{
 			component->setObject(object);
 			components.push_back(component);
+			component->onInit();
 		}
 		
 		void updateComponents()

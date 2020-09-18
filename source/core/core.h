@@ -6,5 +6,6 @@
 #include <core/world/background.h>
 
 #include <core/components/component_draw.h>
+#include <core/components/component_physix.h>
 
 #include <core/window.h>

@@ -19,3 +19,7 @@ void ComponentDraw::draw()
 {
 	object->drawSprite();
 }
+
+void ComponentDraw::onInit()
+{
+}
