@@ -46,8 +46,6 @@ void Entity::update()
 void Entity::draw()
 {
 	drawComponents();
-
-	ImGui::Text("Hello, world!");
 }
 
 void Entity::drawSprite()

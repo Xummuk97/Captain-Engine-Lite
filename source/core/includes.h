@@ -3,6 +3,7 @@
 #include <list>
 #include <vector>
 #include <iostream>
+#include <functional>
 
 #include <SFML/Main.hpp>
 #include <SFML/Graphics.hpp>
@@ -20,6 +21,7 @@
 
 #include <core/singleton.h>
 #include <core/properties.h>
+#include <core/events.h>
 
 using namespace std;
 using namespace tinyxml2;

@@ -10,6 +10,7 @@ Window::Window()
 
 Window::Window(const string& title, int width, int height)
 	: Singleton(this)
+	, Events(this)
 	, render_window(new sf::RenderWindow(sf::VideoMode(width, height), title))
 {
 	ImGui::SFML::Init(*render_window);
@@ -48,6 +49,7 @@ void Window::exec()
 
 		render_window->clear();
 		World::getInstance()->draw();
+		callEvent(WINDOW_EVENT_GUI);
 		ImGui::SFML::Render(*render_window);
 		render_window->display();
 	}

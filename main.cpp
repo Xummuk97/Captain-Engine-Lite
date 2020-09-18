@@ -24,6 +24,12 @@ int main()
 	Window window("Captain Engine Lite 1.0", 800, 600);
     window.setFPSLimit(60);
     window.setVerticalSyncEnabled(false);
+
+    window.bindEvent(WINDOW_EVENT_GUI, [](Window* window)
+    {
+        ImGui::Text("fps: %f", 1 / window->getDeltaTime());
+    });
+
 	window.exec();
 	return EXIT_SUCCESS;
 }

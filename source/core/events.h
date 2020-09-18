@@ -1,5 +1,7 @@
 #pragma once
-#include <core/includes.h>
+#include <map>
+
+using namespace std;
 
 namespace captain_lite
 {
@@ -7,8 +9,6 @@ namespace captain_lite
 	class Events
 	{
 	public:
-		using F = void(*) (T* sender);
-		
 		Events(T* sender)
 			: sender(sender)
 		{}
@@ -16,18 +16,21 @@ namespace captain_lite
 		~Events()
 		{}
 
-		void bindEvent(const string& name, F f)
+		void bindEvent(const string& name, void(*F)(T* sender))
 		{
 			events[name] = F;
 		}
-
+		
 		void callEvent(const string& name)
 		{
-			events[name](sender);
+			if (events.find(name) != events.end())
+			{
+				events[name](sender);
+			}
 		}
 
 	private:
 		T* sender;
-		map<string, F> events;
+		map<string, void(*)(T*)> events;
 	};
 }

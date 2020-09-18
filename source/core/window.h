@@ -3,7 +3,9 @@
 
 namespace captain_lite
 {
-	class Window : public Singleton<Window>
+	const string WINDOW_EVENT_GUI = "EVENT_GUI";
+
+	class Window : public Singleton<Window>, public Events<Window>
 	{
 	public:
 		Window();
