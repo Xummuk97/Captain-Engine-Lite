@@ -11,7 +11,13 @@ int main()
     World world;
     world.loadMap("test.tmx");
 
+    LayerObjects* lo = new LayerObjects("test");
+    Entity* e = new Entity("test", 0, 0, 32, 32);
+    lo->pushEntity(e);
+    world.pushLayer(lo);
+
     Camera camera(0, 0, 800.0f, 600.0f);
+    camera.bindEntity(e);
 
     Background background("background1", 0, 0, 800, 600);
 

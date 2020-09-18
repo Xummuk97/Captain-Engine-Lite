@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="left-up" width="256" height="256" tilewidth="32" tileheight="32" infinite="1" nextlayerid="5" nextobjectid="2">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="left-up" width="1000" height="1000" tilewidth="32" tileheight="32" infinite="1" nextlayerid="5" nextobjectid="2">
  <tileset firstgid="1" name="test1" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="../textures/test1.png" trans="ffffff" width="32" height="32"/>
  </tileset>
- <layer id="1" name="tiles" width="256" height="256">
+ <layer id="1" name="tiles" width="1000" height="1000">
   <data encoding="csv">
    <chunk x="0" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,

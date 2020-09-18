@@ -78,6 +78,8 @@ void World::loadMapFromTMX(const string& file)
 		XMLElement* chunk = layer->FirstChildElement("data")->FirstChildElement("chunk");
 		while (chunk)
 		{
+			Chunk* obj_chunk = new Chunk;
+
 			int chunk_pos_x = chunk->IntAttribute("x") * tilewidth;
 			int chunk_pos_y = chunk->IntAttribute("y") * tileheight;
 			int chunk_width = chunk->IntAttribute("width");
@@ -85,6 +87,8 @@ void World::loadMapFromTMX(const string& file)
 
 			int element_pos_x = 0;
 			int element_pos_y = 0;
+
+			obj_chunk->setRect(chunk_pos_x, chunk_pos_y, chunk_width * tilewidth, chunk_height * tileheight);
 
 			string chunk_text = chunk->GetText();
 			size_t size = chunk_text.size();
@@ -101,7 +105,7 @@ void World::loadMapFromTMX(const string& file)
 						sprite.setTexture(texture_map);
 						sprite.setTextureRect(image_rects[tile_id]);
 						sprite.setPosition({ float(chunk_pos_x + element_pos_x * tilewidth), float(chunk_pos_y + element_pos_y * tileheight) });
-						layer_chunks->pushSprite(sprite);
+						obj_chunk->pushSprite(sprite);
 					}
 
 					num.clear();
@@ -119,6 +123,7 @@ void World::loadMapFromTMX(const string& file)
 				}
 			}
 
+			layer_chunks->pushChunk(obj_chunk);
 			chunk = chunk->NextSiblingElement("chunk");
 		}
 

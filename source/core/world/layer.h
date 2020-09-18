@@ -42,19 +42,36 @@ namespace captain_lite
 		list<Entity*> entities;
 	};
 
+	class Chunk
+	{
+	public:
+		Chunk();
+		~Chunk();
+
+		void setRect(float x, float y, float width, float height);
+		sf::FloatRect getRect();
+		void pushSprite(const sf::Sprite& sprite);
+		
+		void draw();
+
+	private:
+		sf::FloatRect rect_chunk;
+		vector<sf::Sprite> sprites;
+	};
+
 	class LayerChunks : public ILayer
 	{
 	public:
 		LayerChunks(const string& name);
 		~LayerChunks();
 
-		void pushSprite(const sf::Sprite& sprite);
+		void pushChunk(Chunk* chunk);
 
 		void update();
 		void draw();
 		LayerType getType();
 
 	private:
-		vector<sf::Sprite> sprites;
+		vector<Chunk*> chunks;
 	};
 }

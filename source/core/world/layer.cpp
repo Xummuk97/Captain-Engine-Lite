@@ -58,6 +58,55 @@ LayerType LayerObjects::getType()
 	return LayerType::Objects;
 }
 
+Chunk::Chunk()
+{
+}
+
+Chunk::~Chunk()
+{
+}
+
+void Chunk::setRect(float x, float y, float width, float height)
+{
+	rect_chunk = { x, y, width, height };
+}
+
+sf::FloatRect Chunk::getRect()
+{
+	return rect_chunk;
+}
+
+void Chunk::pushSprite(const sf::Sprite& sprite)
+{
+	sprites.push_back(sprite);
+}
+
+void Chunk::draw()
+{
+	sf::FloatRect visible_rect = Camera::getInstance()->getVisibleRect();
+
+	if (visible_rect.intersects(rect_chunk))
+	{
+		for (sf::Sprite sprite : sprites)
+		{
+			sf::FloatRect rect_sprite = sprite.getGlobalBounds();
+
+			if (visible_rect.intersects(rect_sprite))
+			{
+				Window::getInstance()->draw(sprite);
+			}
+			else
+			{
+				if ((rect_sprite.left > visible_rect.left + visible_rect.width) &&
+					(rect_sprite.top > visible_rect.top + visible_rect.height))
+				{
+					return;
+				}
+			}
+		}
+	}
+}
+
 LayerChunks::LayerChunks(const string& name)
 	: ILayer(name)
 {
@@ -67,9 +116,9 @@ LayerChunks::~LayerChunks()
 {
 }
 
-void LayerChunks::pushSprite(const sf::Sprite& sprite)
+void LayerChunks::pushChunk(Chunk* chunk)
 {
-	sprites.push_back(sprite);
+	chunks.push_back(chunk);
 }
 
 void LayerChunks::update()
@@ -78,12 +127,9 @@ void LayerChunks::update()
 
 void LayerChunks::draw()
 {
-	for (sf::Sprite sprite : sprites)
+	for (Chunk* chunk : chunks)
 	{
-		if (Camera::getInstance()->isVisible(sprite.getGlobalBounds()))
-		{
-			Window::getInstance()->draw(sprite);
-		}
+		chunk->draw();
 	}
 }
 
