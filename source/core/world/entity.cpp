@@ -35,11 +35,11 @@ void Entity::update()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		sprite.move(1000.0f * Window::getInstance()->getDeltaTime(), 0.0f);
+		sprite.move(10000.0f * Window::getInstance()->getDeltaTime(), 0.0f);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		sprite.move(0.0f, 1000.0f * Window::getInstance()->getDeltaTime());
+		sprite.move(0.0f, 10000.0f * Window::getInstance()->getDeltaTime());
 	}
 }
 

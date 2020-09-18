@@ -27,7 +27,9 @@ int main()
 
     window.bindEvent(WINDOW_EVENT_GUI, [](Window* window)
     {
+        ImGui::Begin("DEBUG");
         ImGui::Text("fps: %f", 1 / window->getDeltaTime());
+        ImGui::End();
     });
 
 	window.exec();

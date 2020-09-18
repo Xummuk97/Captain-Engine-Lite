@@ -8,10 +8,6 @@ using namespace captain_lite;
 World::World()
 	: Singleton(this)
 {
-	space = cpSpaceNew();
-	cpSpaceSetIterations(space, 30);
-	cpSpaceSetGravity(space, cpv(0, 9.8f));
-	cpSpaceSetSleepTimeThreshold(space, 0.5f);
 }
 
 World::~World()
@@ -88,7 +84,7 @@ void World::loadMapFromTMX(const string& file)
 			int element_pos_x = 0;
 			int element_pos_y = 0;
 
-			obj_chunk->setRect(chunk_pos_x, chunk_pos_y, chunk_width * tilewidth, chunk_height * tileheight);
+			obj_chunk->setRect((float)chunk_pos_x, (float)chunk_pos_y, float(chunk_width * tilewidth), float(chunk_height * tileheight));
 
 			string chunk_text = chunk->GetText();
 			size_t size = chunk_text.size();
@@ -146,20 +142,8 @@ void World::clear()
 	layers.clear();
 }
 
-cpSpace* World::getSpace()
-{
-	return space;
-}
-
-LightSystem* captain_lite::World::getLightSystem()
-{
-	return &light_system;
-}
-
 void World::update()
 {
-	cpSpaceStep(World::getInstance()->getSpace(), Window::getInstance()->getDeltaTime());
-
 	for (ILayer* entity : layers)
 	{
 		entity->update();
@@ -177,6 +161,4 @@ void World::draw()
 	{
 		entity->draw();
 	}
-
-	light_system.draw();
 }

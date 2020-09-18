@@ -13,17 +13,4 @@ namespace captain_lite
 		void update();
 		void draw();
 	};
-
-	class ComponentBackLight : public IComponent<Entity>
-	{
-	public:
-		ComponentBackLight();
-		~ComponentBackLight();
-
-		void update();
-		void draw();
-
-	private:
-		sfl::Light light;
-	};
 }

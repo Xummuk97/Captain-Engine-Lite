@@ -66,16 +66,6 @@ void Window::draw(const sf::Sprite& sprite)
 	render_window->draw(sprite);
 }
 
-void Window::draw(sfl::Light& light)
-{
-	light.Render(*render_window);
-}
-
-void Window::draw(sfl::LightScene& light_scene)
-{
-	light_scene.Render(*render_window);
-}
-
 void Window::setView(const sf::View& view)
 {
 	render_window->setView(view);

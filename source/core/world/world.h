@@ -1,7 +1,6 @@
 #pragma once
 #include <core/includes.h>
 #include <core/world/layer.h>
-#include <core/world/light_system.h>
 
 namespace captain_lite
 {
@@ -15,17 +14,12 @@ namespace captain_lite
 		void pushLayer(ILayer* layer);
 		void clear();
 
-		cpSpace* getSpace();
-		LightSystem* getLightSystem();
-
 		void update();
 		void draw();
 
 	private:
 		void loadMapFromTMX(const string& file);
 
-		cpSpace* space = nullptr;
-		LightSystem light_system;
 		sf::Texture texture_map;
 		vector<sf::IntRect> image_rects;
 		list<ILayer*> layers;

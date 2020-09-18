@@ -14,8 +14,6 @@ namespace captain_lite
 
 		float getDeltaTime();
 		void draw(const sf::Sprite& sprite);
-		void draw(sfl::Light& light);
-		void draw(sfl::LightScene& light_scene);
 		void setView(const sf::View& view);
 		void setFPSLimit(unsigned int limit);
 		void setVerticalSyncEnabled(bool enabled);
