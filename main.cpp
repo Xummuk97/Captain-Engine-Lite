@@ -4,8 +4,6 @@ using namespace captain_lite;
 
 int main() 
 {
-    cout << Utils::format("Hello, {1}!", "Andrey") << endl;
-
     Resources resources;
     resources.add("background1", new ResourceTexture("background1.jpg"));
     resources.add("test", new ResourceTexture("test1.png"));
@@ -26,6 +24,7 @@ int main()
             Entity* entity = new Entity("background1", 0, 0, 32, 32);
             entity->setPosition(position.x, position.y);
             entity->addComponent(new ComponentDraw);
+            entity->addComponent(new ComponentPhysix);
             Camera::getInstance()->bindEntity(entity);
             world->getEntityLayer(properties->getPropertyString("layer"))->pushEntity(entity);
         }
