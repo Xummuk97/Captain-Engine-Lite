@@ -45,6 +45,16 @@ string captain_lite::Entity::getName()
 	return name;
 }
 
+void Entity::setKillEnabled(bool enabled)
+{
+	is_kill = enabled;
+}
+
+bool Entity::isKill()
+{
+	return is_kill;
+}
+
 void Entity::update()
 {
 	updateComponents();

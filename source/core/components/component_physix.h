@@ -20,5 +20,7 @@ namespace captain_lite
 		void collisionY(bool jump);
 
 		void collisionBonus();
+
+		bool is_collision_bonus = false;
 	};
 }

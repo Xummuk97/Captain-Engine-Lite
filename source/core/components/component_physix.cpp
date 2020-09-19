@@ -14,6 +14,8 @@ ComponentPhysix::~ComponentPhysix()
 
 void ComponentPhysix::update()
 {
+	is_collision_bonus = false;
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		object->move(-100.0f, 0.0f);
@@ -105,6 +107,11 @@ void ComponentPhysix::collisionY(bool jump)
 
 void ComponentPhysix::collisionBonus()
 {
+	if (is_collision_bonus)
+	{
+		return;
+	}
+
 	list<Entity*> entitites = World::getInstance()->getEntitiesFromName("bonus");
 
 	sf::FloatRect object_rect = object->getGlobalBounds();
@@ -114,6 +121,8 @@ void ComponentPhysix::collisionBonus()
 		if (object_rect.intersects(entity->getGlobalBounds()))
 		{
 			cout << "BONUS COLLISION!" << endl;
+			entity->setKillEnabled(true);
+			is_collision_bonus = true;
 			return;
 		}
 	}

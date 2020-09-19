@@ -16,6 +16,9 @@ namespace captain_lite
 		sf::FloatRect getGlobalBounds();
 		string getName();
 
+		void setKillEnabled(bool enabled);
+		bool isKill();
+
 		void update();
 		void draw();
 		void drawSprite();
@@ -23,6 +26,7 @@ namespace captain_lite
 	private:
 		sf::Sprite sprite;
 		string name;
+		bool is_kill = false;
 	};
 
 	struct EntityInfo : public Properties

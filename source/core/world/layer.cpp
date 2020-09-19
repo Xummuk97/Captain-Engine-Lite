@@ -62,9 +62,19 @@ void LayerEntities::getEntitiesFromName(const string& name, list<Entity*>* entit
 
 void LayerEntities::update()
 {
-	for (Entity* entity : entities)
+	for (list<Entity*>::iterator it = entities.begin(); it != entities.end();)
 	{
-		entity->update();
+		Entity* entity = *it;
+
+		if (entity->isKill())
+		{
+			it = entities.erase(it);
+		}
+		else
+		{
+			entity->update();
+			it++;
+		}
 	}
 }
 
