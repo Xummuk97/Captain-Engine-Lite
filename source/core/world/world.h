@@ -48,5 +48,7 @@ namespace captain_lite
 
 		list<ILayer*> layers;
 		map<string, list<EntityInfo*>> group_entities_info;
+
+		cp::Space space;
 	};
 }

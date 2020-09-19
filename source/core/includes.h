@@ -23,5 +23,7 @@
 
 #include <cpp/INIReader.h>
 
+#include <chipmunk.hpp>
+
 using namespace std;
 using namespace tinyxml2;

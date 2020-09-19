@@ -9,6 +9,8 @@ World::World()
 	: Singleton(this)
 	, Events(this)
 {
+	space.setGravity({ 0.0f, 9.8f });
+
 }
 
 World::~World()
@@ -282,6 +284,8 @@ int World::getTileHeight()
 
 void World::update()
 {
+	space.step(1 / 60.0f);
+
 	for (ILayer* entity : layers)
 	{
 		entity->update();
