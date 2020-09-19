@@ -6,9 +6,10 @@
 
 using namespace captain_lite;
 
-Entity::Entity(const string& texture_name, int x, int y, int width, int height)
+Entity::Entity(const string& name, const string& texture_name, int x, int y, int width, int height)
 	: Components(this)
 	, Events(this)
+	, name(name)
 {
 	Utils::loadTextureFromResources(texture_name, sprite, x, y, width, height);
 }
@@ -37,6 +38,11 @@ sf::Vector2f Entity::getOriginPosition()
 sf::FloatRect Entity::getGlobalBounds()
 {
 	return sprite.getGlobalBounds();
+}
+
+string captain_lite::Entity::getName()
+{
+	return name;
 }
 
 void Entity::update()

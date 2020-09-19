@@ -37,6 +37,29 @@ void LayerEntities::pushEntity(Entity* entity)
 	entities.push_back(entity);
 }
 
+Entity* LayerEntities::getEntityFromName(const string& name)
+{
+	for (Entity* entity : entities)
+	{
+		if (entity->getName() == name)
+		{
+			return entity;
+		}
+	}
+	return nullptr;
+}
+
+void LayerEntities::getEntitiesFromName(const string& name, list<Entity*>* entities_from_name)
+{
+	for (Entity* entity : entities)
+	{
+		if (entity->getName() == name)
+		{
+			entities_from_name->push_back(entity);
+		}
+	}
+}
+
 void LayerEntities::update()
 {
 	for (Entity* entity : entities)

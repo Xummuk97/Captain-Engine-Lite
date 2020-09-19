@@ -18,22 +18,26 @@ void ComponentPhysix::update()
 	{
 		object->move(-100.0f, 0.0f);
 		collisionX(true);
+		collisionBonus();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		object->move(100.0f, 0.0f);
 		collisionX(false);
+		collisionBonus();
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		object->move(0.0f, -9.8f);
 		collisionY(true);
+		collisionBonus();
 	}
 	else
 	{
 		object->move(0.0f, 9.8f);
 		collisionY(false);
+		collisionBonus();
 	}
 }
 
@@ -43,14 +47,13 @@ void ComponentPhysix::draw()
 
 void ComponentPhysix::onInit()
 {
-	object->setProperty(COMPONENT_PHYSIX_PROP_DIR, sf::Vector2f());
 }
 
 void ComponentPhysix::collisionX(bool dir)
 {
-	sf::FloatRect object_rect = object->getGlobalBounds();
-
 	list<EntityInfo*> collision_entities = World::getInstance()->getEntitiesInfo("collision");
+
+	sf::FloatRect object_rect = object->getGlobalBounds();
 
 	for (EntityInfo* collision_entity : collision_entities)
 	{
@@ -75,9 +78,9 @@ void ComponentPhysix::collisionX(bool dir)
 
 void ComponentPhysix::collisionY(bool jump)
 {
-	sf::FloatRect object_rect = object->getGlobalBounds();
-
 	list<EntityInfo*> collision_entities = World::getInstance()->getEntitiesInfo("collision");
+
+	sf::FloatRect object_rect = object->getGlobalBounds();
 
 	for (EntityInfo* collision_entity : collision_entities)
 	{
@@ -95,6 +98,22 @@ void ComponentPhysix::collisionY(bool jump)
 			}
 			
 			object->setPosition(object_rect.left, object_rect.top);
+			return;
+		}
+	}
+}
+
+void ComponentPhysix::collisionBonus()
+{
+	list<Entity*> entitites = World::getInstance()->getEntitiesFromName("bonus");
+
+	sf::FloatRect object_rect = object->getGlobalBounds();
+
+	for (Entity* entity : entitites)
+	{
+		if (object_rect.intersects(entity->getGlobalBounds()))
+		{
+			cout << "BONUS COLLISION!" << endl;
 			return;
 		}
 	}

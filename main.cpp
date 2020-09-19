@@ -21,14 +21,23 @@ int main()
         {
             sf::Vector2f position = Utils::getXmlAttributeVector2f(object_element);
 
-            Entity* entity = new Entity("background1", 0, 0, 32, 32);
+            Entity* entity = new Entity("player", "background1", 0, 0, 32, 32);
             entity->setPosition(position.x, position.y);
             entity->addComponent(new ComponentDraw);
             entity->addComponent(new ComponentPhysix);
             Camera::getInstance()->bindEntity(entity);
             world->getEntityLayer(properties->getPropertyString("layer"))->pushEntity(entity);
         }
-        else
+        else if (object_name == "bonus")
+        {
+            sf::Vector2f position = Utils::getXmlAttributeVector2f(object_element);
+
+            Entity* entity = new Entity("bonus", "background1", 0, 0, 32, 32);
+            entity->setPosition(position.x, position.y);
+            entity->addComponent(new ComponentDraw);
+            world->getEntityLayer(properties->getPropertyString("layer"))->pushEntity(entity);
+        }
+        else if (object_name == "collision")
         {
             sf::FloatRect rect = Utils::getXmlAttributeFloatRect(object_element);
 

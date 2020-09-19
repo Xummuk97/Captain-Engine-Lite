@@ -217,18 +217,47 @@ void World::pushEntityInfo(const string& name, EntityInfo* entity_info)
 EntityInfo* World::getEntityInfo(const string& name)
 {
 	list<EntityInfo*> entities_info = group_entities_info[name];
-
-	if (entities_info.size() == 0)
-	{
-		return nullptr;
-	}
-
 	return entities_info.front();
 }
 
-list<EntityInfo*>& World::getEntitiesInfo(const string& name)
+list<EntityInfo*> World::getEntitiesInfo(const string& name)
 {
 	return group_entities_info[name];
+}
+
+Entity* World::getEntityFromName(const string& name)
+{
+	Entity* entity = nullptr;
+
+	for (ILayer* layer : layers)
+	{
+		if (layer->getType() == LayerType::Objects)
+		{
+			entity = ((LayerEntities*)layer)->getEntityFromName(name);
+
+			if (entity)
+			{
+				return entity;
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+list<Entity*> World::getEntitiesFromName(const string& name)
+{
+	list<Entity*> entities_from_name;
+
+	for (ILayer* layer : layers)
+	{
+		if (layer->getType() == LayerType::Objects)
+		{
+			((LayerEntities*)layer)->getEntitiesFromName(name, &entities_from_name);
+		}
+	}
+
+	return entities_from_name;
 }
 
 int World::getMapWidth()

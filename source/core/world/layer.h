@@ -33,6 +33,8 @@ namespace captain_lite
 		~LayerEntities();
 
 		void pushEntity(Entity* entity);
+		Entity* getEntityFromName(const string& name);
+		void getEntitiesFromName(const string& name, list<Entity*>* entities_from_name);
 
 		void update();
 		void draw();

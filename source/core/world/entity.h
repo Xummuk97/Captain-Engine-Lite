@@ -7,13 +7,14 @@ namespace captain_lite
 	class Entity : public Components<Entity>, public Events<Entity>, public Properties
 	{
 	public:
-		Entity(const string& texture_name, int x, int y, int width, int height);
+		Entity(const string& name, const string& texture_name, int x, int y, int width, int height);
 		~Entity();
 
 		void setPosition(float x, float y);
 		void move(float x, float y);
 		sf::Vector2f getOriginPosition();
 		sf::FloatRect getGlobalBounds();
+		string getName();
 
 		void update();
 		void draw();
@@ -21,6 +22,7 @@ namespace captain_lite
 
 	private:
 		sf::Sprite sprite;
+		string name;
 	};
 
 	struct EntityInfo : public Properties

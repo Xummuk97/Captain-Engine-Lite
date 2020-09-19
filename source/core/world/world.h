@@ -17,7 +17,9 @@ namespace captain_lite
 		LayerEntities* getEntityLayer(const string& name);
 		void pushEntityInfo(const string& name, EntityInfo* entity_info);
 		EntityInfo* getEntityInfo(const string& name);
-		list<EntityInfo*>& getEntitiesInfo(const string& name);
+		list<EntityInfo*> getEntitiesInfo(const string& name);
+		Entity* getEntityFromName(const string& name);
+		list<Entity*> getEntitiesFromName(const string& name);
 		void clear();
 
 		int getMapWidth();
