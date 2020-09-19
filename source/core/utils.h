@@ -27,6 +27,7 @@ namespace captain_lite
 		static string toString(double x);
 		static string toString(long double x);
 		static string toString(const char* x);
+		static string toString(char* x);
 		static string toString(const string& x);
 
 		template<class T>
@@ -76,5 +77,10 @@ namespace captain_lite
 
 			return result;
 		}
+
+		static const tm* getTime();
+
+		// http://cplusplus.com/reference/ctime/strftime/
+		static string formatTime(const tm* ti, const string& fmt);
 	};
 }

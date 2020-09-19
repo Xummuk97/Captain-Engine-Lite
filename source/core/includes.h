@@ -19,6 +19,9 @@
 #include <core/properties.h>
 #include <core/events.h>
 #include <core/utils.h>
+#include <core/log.h>
+
+#include <cpp/INIReader.h>
 
 using namespace std;
 using namespace tinyxml2;

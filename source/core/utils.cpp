@@ -79,3 +79,22 @@ string Utils::toString(const string& x)
 {
     return x;
 }
+
+const tm* Utils::getTime()
+{
+    time_t seconds = time(NULL);
+    tm* ti = localtime(&seconds);
+    return ti;
+}
+
+string Utils::formatTime(const tm* ti, const string& fmt)
+{
+    char time[128];
+    strftime(time, sizeof(time), fmt.c_str(), ti);
+    return string(time);
+}
+
+string Utils::toString(char* x)
+{
+    return string(x);
+}

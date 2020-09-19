@@ -1,0 +1,5 @@
+[ERROR] Main is not good!
+Time: 2020-09-19 15:59:47
+File: C:\Users\Andrey\source\repos\Engine_SFML_Lua\Engine_SFML_Lua\source\core\window.cpp
+Function: captain_lite::Window::Window
+Line: 17
