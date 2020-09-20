@@ -1,5 +1,6 @@
 #include <core/window.h>
 #include <core/world/world.h>
+#include <core/gui/console.h>
 
 using namespace captain_lite;
 
@@ -36,7 +37,14 @@ void Window::exec()
 				render_window->close();
 				break;
 
-			case sf::Event::KeyPressed:
+			case sf::Event::KeyReleased:
+
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Tilde:
+					Console::getInstance()->setEnabled();
+					break;
+				}
 
 				break;
 			}
@@ -50,6 +58,7 @@ void Window::exec()
 		render_window->clear();
 		World::getInstance()->draw();
 		callEvent(WINDOW_EVENT_GUI);
+		Console::getInstance()->draw();
 		ImGui::SFML::Render(*render_window);
 		render_window->display();
 	}

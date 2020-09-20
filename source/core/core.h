@@ -9,3 +9,5 @@
 #include <core/components/component_physix.h>
 
 #include <core/window.h>
+
+#include <core/gui/console.h>
