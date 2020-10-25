@@ -13,7 +13,7 @@ public:
 	void PushLayer(const string& name, shared_ptr<ILayer>& layer);
 	bool HasLayer(const string& name);
 	void RemoveLayer(const string& name);
-	ILayer& GetLayer(const string& name);
+	weak_ptr<ILayer> GetLayer(const string& name);
 
 	void Update();
 	void Draw();

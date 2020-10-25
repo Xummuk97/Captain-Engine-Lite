@@ -33,7 +33,7 @@ void Timer::Update()
 	{
 		_time = 0.0f;
 		_count++;
-		_onExpired(this);
+		_onExpired(*this);
 
 		if (!(_flags & TIMER_REPEAT))
 		{

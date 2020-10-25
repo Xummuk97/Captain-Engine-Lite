@@ -6,7 +6,7 @@
 
 class Timer
 {
-	using Func = void(*)(Timer* timer);
+	using Func = void(*)(Timer& timer);
 
 	Func _onExpired;
 	float _delay;
@@ -27,13 +27,13 @@ public:
 
 class TimerManager
 {
-	list<shared_ptr<Timer>> _timers;
+	map<string, shared_ptr<Timer>> _timers;
 
 public:
 	TimerManager() = default;
 	virtual ~TimerManager() = default;
 
-	void Add(shared_ptr<Timer>& timer);
+	void Add(const string& name, shared_ptr<Timer>& timer);
 
 	void Update();
 };

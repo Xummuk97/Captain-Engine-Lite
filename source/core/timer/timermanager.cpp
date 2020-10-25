@@ -1,8 +1,8 @@
 #include "timer.h"
 
-void TimerManager::Add(shared_ptr<Timer>& timer)
+void TimerManager::Add(const string& name, shared_ptr<Timer>& timer)
 {
-	_timers.push_back(timer);
+	_timers[name] = timer;
 	timer.reset();
 }
 
@@ -10,9 +10,9 @@ void TimerManager::Update()
 {
 	for (auto it = _timers.begin(); it != _timers.end();)
 	{
-		(*it)->Update();
+		it->second->Update();
 
-		if ((*it)->GetFlags() & TIMER_KILL)
+		if (it->second->GetFlags() & TIMER_KILL)
 		{
 			it = _timers.erase(it);
 		}
