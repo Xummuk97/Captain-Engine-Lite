@@ -1,8 +1,9 @@
 #include "layer.h"
 
-void EntitiesLayer::PushEntity(shared_ptr<Entity> entity)
+void EntitiesLayer::PushEntity(shared_ptr<Entity>& entity)
 {
 	_entities.push_back(entity);
+	entity.reset();
 }
 
 void EntitiesLayer::Update()

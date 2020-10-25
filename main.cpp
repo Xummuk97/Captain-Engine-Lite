@@ -7,29 +7,19 @@ int main()
         Core c;
 
         auto timer = make_shared<Timer>(2.0f, [](Timer* timer) {
-            if (timer->GetCount() < 3)
-            {
-                cout << "COUNT: " << timer->GetCount() << endl;
-            }
-            else
-            {
-                cout << "KILL" << endl;
-                timer->Remove();
-            }
-        }, TIMER_REPEAT);
-        Core::timerManagerInstance.Add(move(timer));
+            cout << "TIMER 2.0f KILL" << endl;
+        });
+        Core::timerManagerInstance.Add(timer);
 
         auto txt = make_shared<TextureResource>("test1.png");
         Core::resourceManagerInstance.Set("test", txt);
 
+        shared_ptr<ILayer> lvl = make_shared<EntitiesLayer>();
+        Core::levelInstance.PushLayer("test", lvl);
+
+        ILayer& newLayer = Core::levelInstance.GetLayer("test");
         auto ent = make_shared<Entity>("test");
-
-        auto lvl = make_shared<EntitiesLayer>();
-        Core::levelInstance.PushLayer("test", move(lvl));
-
-        Core::levelInstance.PushEntity("test", move(ent));
-
-        Core::levelInstance.RemoveLayer("test");
+        newLayer.PushEntity(ent);
 
         c.Start();
     }

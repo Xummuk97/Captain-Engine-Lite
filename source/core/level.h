@@ -10,11 +10,10 @@ public:
 	Level() = default;
 	virtual ~Level() = default;
 
-	void PushLayer(const string& name, shared_ptr<ILayer> layer);
+	void PushLayer(const string& name, shared_ptr<ILayer>& layer);
 	bool HasLayer(const string& name);
 	void RemoveLayer(const string& name);
-
-	void PushEntity(const string& layer, shared_ptr<Entity> entity);
+	ILayer& GetLayer(const string& name);
 
 	void Update();
 	void Draw();

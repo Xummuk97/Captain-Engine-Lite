@@ -33,7 +33,7 @@ public:
 	TimerManager() = default;
 	virtual ~TimerManager() = default;
 
-	void Add(shared_ptr<Timer> timer);
+	void Add(shared_ptr<Timer>& timer);
 
 	void Update();
 };

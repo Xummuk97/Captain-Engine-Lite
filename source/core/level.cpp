@@ -1,10 +1,11 @@
 #include "level.h"
 
-void Level::PushLayer(const string& name, shared_ptr<ILayer> layer)
+void Level::PushLayer(const string& name, shared_ptr<ILayer>& layer)
 {
 	if (!HasLayer(name))
 	{
 		_layers[name] = layer;
+		layer.reset();
 	}
 	else
 	{
@@ -29,16 +30,14 @@ void Level::RemoveLayer(const string& name)
 	}
 }
 
-void Level::PushEntity(const string& layer, shared_ptr<Entity> entity)
+ILayer& Level::GetLayer(const string& name)
 {
-	if (HasLayer(layer))
+	if (!HasLayer(name))
 	{
-		_layers[layer]->PushEntity(move(entity));
+		throw "[Level::PushEntity] Error: Layer '" + name + "' not found.";
 	}
-	else
-	{
-		throw "[Level::PushEntity] Error: Layer '" + layer + "' not found.";
-	}
+	
+	return *_layers[name];
 }
 
 void Level::Update()

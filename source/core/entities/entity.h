@@ -9,7 +9,7 @@ class Entity
 public:
 	Entity() = default;
 	Entity(const string& name);
-	virtual ~Entity() = default;
+	virtual ~Entity() {cout << "DELETE ENTITY" << endl;};
 
 	void SetTexture(const string& name);
 	void SetTextureRect(const sf::IntRect& rect);

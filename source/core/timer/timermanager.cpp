@@ -1,8 +1,9 @@
 #include "timer.h"
 
-void TimerManager::Add(shared_ptr<Timer> timer)
+void TimerManager::Add(shared_ptr<Timer>& timer)
 {
 	_timers.push_back(timer);
+	timer.reset();
 }
 
 void TimerManager::Update()

@@ -6,13 +6,13 @@ class ILayer
 {
 public:
 	ILayer() = default;
-	virtual ~ILayer() = default;
+	virtual ~ILayer() { cout << "DELETE LAYER" << endl; };
 
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
 	virtual string GetName() const = 0;
-	virtual void PushEntity(shared_ptr<Entity> entity) = 0;
+	virtual void PushEntity(shared_ptr<Entity>& entity) = 0;
 };
 
 class EntitiesLayer : public ILayer
@@ -27,5 +27,5 @@ public:
 	void Draw() override;
 
 	string GetName() const override;
-	void PushEntity(shared_ptr<Entity> entity);
+	void PushEntity(shared_ptr<Entity>& entity);
 };
