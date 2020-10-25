@@ -1,6 +1,7 @@
 #pragma once
 #include <core/includes.h>
 #include <core/level.h>
+#include <core/resources/resource.h>
 
 class Core
 {
@@ -9,4 +10,12 @@ public:
 	virtual ~Core() = default;
 
 	void Start();
+
+	static ResourceManager resourceManagerInstance;
+	static Level levelInstance;
+	static Space spaceInstance;
+
+	static sf::RenderWindow* windowInstance;
+
+	static float deltaTimeInstance;
 };

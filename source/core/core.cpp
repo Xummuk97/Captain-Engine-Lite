@@ -1,41 +1,47 @@
 #include "core.h"
-#include <core/system.h>
 #include <core/macros.h>
+
+ResourceManager										Core::resourceManagerInstance;
+Level												Core::levelInstance;
+Space												Core::spaceInstance;
+
+sf::RenderWindow*									Core::windowInstance;
+float												Core::deltaTimeInstance;
 
 Core::Core(const string& title, int width, int height)
 {
-	System::window = new sf::RenderWindow(sf::VideoMode(width, height), title);
-	ImGui::SFML::Init(*System::window);
+	windowInstance = new sf::RenderWindow(sf::VideoMode(width, height), title);
+	ImGui::SFML::Init(*windowInstance);
 
-	System::space.setGravity(Vect(0, 100));
+	spaceInstance.setGravity(Vect(0, 100));
 }
 
 void Core::Start()
 {
 	sf::Clock clock;
 
-	while (System::window->isOpen())
+	while (windowInstance->isOpen())
 	{
 		sf::Event event;
-		while (System::window->pollEvent(event))
+		while (windowInstance->pollEvent(event))
 		{
 			ImGui::SFML::ProcessEvent(event);
 
 			if (event.type == sf::Event::Closed)
 			{
-				System::window->close();
+				windowInstance->close();
 			}
 		}
 
 		sf::Time time = clock.restart();
-		System::deltaTime = time.asSeconds();
-		ImGui::SFML::Update(*System::window, time);
-		System::space.step(1 / 60.0f);
-		System::level.Update();
+		deltaTimeInstance = time.asSeconds();
+		ImGui::SFML::Update(*windowInstance, time);
+		spaceInstance.step(1 / 60.0f);
+		levelInstance.Update();
 		
-		System::window->clear();
-		System::level.Draw();
-		ImGui::SFML::Render(*System::window);
-		System::window->display();
+		windowInstance->clear();
+		levelInstance.Draw();
+		ImGui::SFML::Render(*windowInstance);
+		windowInstance->display();
 	}
 }
