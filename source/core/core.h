@@ -1,13 +1,12 @@
 #pragma once
+#include <core/includes.h>
+#include <core/level.h>
 
-#include <core/world/resource.h>
-#include <core/world/world.h>
-#include <core/world/camera.h>
-#include <core/world/background.h>
+class Core
+{
+public:
+	Core(const string& title, int width, int height);
+	virtual ~Core() = default;
 
-#include <core/components/component_draw.h>
-#include <core/components/component_physix.h>
-
-#include <core/window.h>
-
-#include <core/gui/console.h>
+	void Start();
+};

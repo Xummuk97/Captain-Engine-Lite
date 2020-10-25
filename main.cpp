@@ -1,76 +1,8 @@
 #include <core/core.h>
 
-using namespace captain_lite;
-
 int main() 
 {
-    Console::getInstance()->bindEvent(CAPTAIN_LITE_CONSOLE_EVENT_INPUT_COMMAND, [](Console* console, Properties* properties)
-    {
-        vector<string> args = properties->getProperty<vector<string>>("args");
-
-        for (string arg : args)
-        {
-            cout << arg << endl;
-        }
-    });
-
-    Resources resources;
-    resources.add("background1", new ResourceTexture("background1.jpg"));
-    resources.add("test", new ResourceTexture("test1.png"));
-    
-    Camera camera(0, 0, 800.0f, 600.0f);
-
-    World world;
-
-    world.bindEvent(WORLD_EVENT_LOAD_ENTITY, [](World* world, Properties* properties)
-    {
-        XMLElement* object_element = properties->getProperty<XMLElement*>("element");
-        string object_name = object_element->Attribute("name");
-
-        if (object_name == "player")
-        {
-            sf::Vector2f position = Utils::getXmlAttributeVector2f(object_element);
-
-            Entity* entity = new Entity("player", "background1", 0, 0, 32, 32);
-            entity->setPosition(position.x, position.y);
-            entity->addComponent(new ComponentDraw);
-            entity->addComponent(new ComponentPhysix);
-            Camera::getInstance()->bindEntity(entity);
-            world->getEntityLayer(properties->getProperty<string>("layer"))->pushEntity(entity);
-        }
-        else if (object_name == "bonus")
-        {
-            sf::Vector2f position = Utils::getXmlAttributeVector2f(object_element);
-
-            Entity* entity = new Entity("bonus", "background1", 0, 0, 32, 32);
-            entity->setPosition(position.x, position.y);
-            entity->addComponent(new ComponentDraw);
-            world->getEntityLayer(properties->getProperty<string>("layer"))->pushEntity(entity);
-        }
-        else if (object_name == "collision")
-        {
-            sf::FloatRect rect = Utils::getXmlAttributeFloatRect(object_element);
-
-            EntityInfo* entity_info = new EntityInfo({ rect.left, rect.top, rect.width, rect.height });
-            world->pushEntityInfo(object_name, entity_info);
-        }
-    });
-
-    world.loadMap("test.tmx");
-
-    Background background("background1", 0, 0, 800, 600);
-
-	Window window("Captain Engine Lite 1.0", 800, 600);
-    window.setFPSLimit(60);
-    window.setVerticalSyncEnabled(false);
-
-    window.bindEvent(WINDOW_EVENT_GUI, [](Window* window, Properties* properties)
-    {
-        ImGui::Begin("DEBUG");
-        ImGui::Text("fps: %f", 1 / window->getDeltaTime());
-        ImGui::End();
-    });
-
-	window.exec();
-	return EXIT_SUCCESS;
+    Core c("Captain Engine Lite 1.0", 800, 600);
+    c.Start();
+    return EXIT_SUCCESS;
 }
