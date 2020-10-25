@@ -29,10 +29,12 @@ public:
 
 class CPEntity : public Entity 
 {
+protected:
 	shared_ptr<Body> _body;
 
 public:
 	CPEntity(Float mass, Float inertia);
+	CPEntity(Float mass, Float inertia, const string& name);
 	~CPEntity();
 
 	Body* GetBody() { return _body.get(); }

@@ -1,6 +1,6 @@
 #pragma once
 #include <core/includes.h>
-#include <core/layer.h>
+#include <core/layers/layer.h>
 
 class Level
 {
@@ -11,6 +11,9 @@ public:
 	virtual ~Level() = default;
 
 	void PushLayer(const string& name, const shared_ptr<ILayer>& layer);
+	bool HasLayer(const string& name);
+
+	void PushEntity(const string& layer, const shared_ptr<Entity>& entity);
 
 	void Update();
 	void Draw();

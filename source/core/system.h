@@ -1,5 +1,5 @@
 #pragma once
-#include <core/resource.h>
+#include <core/resources/resource.h>
 #include <core/core.h>
 
 class System

@@ -5,8 +5,8 @@
 Core::Core(const string& title, int width, int height)
 {
 	System::window = new sf::RenderWindow(sf::VideoMode(width, height), title);
-
 	ImGui::SFML::Init(*System::window);
+
 	System::space.setGravity(Vect(0, 100));
 }
 

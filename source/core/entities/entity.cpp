@@ -1,5 +1,4 @@
 #include "entity.h"
-
 #include <core/system.h>
 
 Entity::Entity(const string& name)
@@ -19,7 +18,7 @@ string Entity::GetTag() const
 
 void Entity::SetTexture(const string& name)
 {
-    _sprite.setTexture(*System::resourceManager.GetTexture(name).get());
+    _sprite.setTexture(System::resourceManager.Get<sf::Texture>(name).Get());
 }
 
 void Entity::SetTextureRect(const sf::IntRect& rect)
@@ -70,6 +69,12 @@ CPEntity::CPEntity(Float mass, Float inertia)
     : _body(make_shared<Body>(mass, inertia))
 {
     System::space.add(_body);
+}
+
+CPEntity::CPEntity(Float mass, Float inertia, const string& name)
+    : CPEntity(mass, inertia)
+{
+    SetTexture(name);
 }
 
 CPEntity::~CPEntity()

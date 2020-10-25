@@ -1,6 +1,6 @@
 #pragma once
 #include <core/includes.h>
-#include <core/entity.h>
+#include <core/entities/entity.h>
 
 class ILayer
 {
@@ -9,6 +9,7 @@ public:
 	virtual void Draw() = 0;
 
 	virtual string GetName() const = 0;
+	virtual void PushEntity(const shared_ptr<Entity>& entity) = 0;
 };
 
 class EntitiesLayer : public ILayer
@@ -19,10 +20,9 @@ public:
 	EntitiesLayer() = default;
 	~EntitiesLayer() = default;
 
-	void PushEntity(const shared_ptr<Entity>& entity);
-
 	void Update() override;
 	void Draw() override;
 
 	string GetName() const override;
+	void PushEntity(const shared_ptr<Entity>& entity);
 };
