@@ -13,7 +13,7 @@ string Entity::GetType() const
 
 string Entity::GetTag() const
 {
-    return "Entity";
+    return _tag;
 }
 
 void Entity::SetTexture(const string& name)
@@ -56,6 +56,11 @@ bool Entity::IsIntersects(const sf::FloatRect& rect)
     return _sprite.getGlobalBounds().intersects(rect);
 }
 
+void Entity::SetTag(const string& tag)
+{
+    _tag = tag;
+}
+
 void Entity::Update()
 {
 }
@@ -83,11 +88,6 @@ CPEntity::~CPEntity()
 }
 
 string CPEntity::GetType() const
-{
-    return "CPEntity";
-}
-
-string CPEntity::GetTag() const
 {
     return "CPEntity";
 }

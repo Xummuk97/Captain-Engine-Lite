@@ -4,6 +4,7 @@
 class Entity
 {
 	sf::Sprite _sprite;
+	string _tag;
 
 public:
 	Entity() = default;
@@ -20,8 +21,10 @@ public:
 	bool IsContains(const sf::Vector2f& point);
 	bool IsIntersects(const sf::FloatRect& rect);
 
+	void SetTag(const string& tag);
+
 	virtual string GetType() const;
-	virtual string GetTag() const;
+	string GetTag() const;
 
 	virtual void Update();
 	virtual void Draw();
@@ -37,10 +40,9 @@ public:
 	CPEntity(Float mass, Float inertia, const string& name);
 	~CPEntity();
 
-	Body* GetBody() { return _body.get(); }
+	shared_ptr<Body> GetBody() { return _body; }
 
 	virtual string GetType() const;
-	virtual string GetTag() const;
 
 	virtual void Update();
 };
