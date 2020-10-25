@@ -1,6 +1,6 @@
 #include "layer.h"
 
-void EntitiesLayer::PushEntity(const shared_ptr<Entity>& entity)
+void EntitiesLayer::PushEntity(shared_ptr<Entity> entity)
 {
 	_entities.push_back(entity);
 }

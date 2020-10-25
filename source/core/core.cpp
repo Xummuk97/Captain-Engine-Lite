@@ -2,6 +2,8 @@
 #include <core/macros.h>
 
 ResourceManager										Core::resourceManagerInstance;
+TimerManager										Core::timerManagerInstance;
+
 Level												Core::levelInstance;
 Space												Core::spaceInstance;
 
@@ -60,6 +62,7 @@ void Core::Start()
 		deltaTimeInstance = time.asSeconds();
 		ImGui::SFML::Update(*windowInstance, time);
 		spaceInstance.step(1 / 60.0f);
+		timerManagerInstance.Update();
 		levelInstance.Update();
 		
 		windowInstance->clear();

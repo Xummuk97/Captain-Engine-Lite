@@ -38,7 +38,7 @@ protected:
 public:
 	CPEntity(Float mass, Float inertia);
 	CPEntity(Float mass, Float inertia, const string& name);
-	~CPEntity();
+	virtual ~CPEntity();
 
 	shared_ptr<Body> GetBody() { return _body; }
 

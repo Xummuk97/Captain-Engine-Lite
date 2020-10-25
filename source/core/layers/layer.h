@@ -5,11 +5,14 @@
 class ILayer
 {
 public:
+	ILayer() = default;
+	virtual ~ILayer() = default;
+
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
 	virtual string GetName() const = 0;
-	virtual void PushEntity(const shared_ptr<Entity>& entity) = 0;
+	virtual void PushEntity(shared_ptr<Entity> entity) = 0;
 };
 
 class EntitiesLayer : public ILayer
@@ -18,11 +21,11 @@ class EntitiesLayer : public ILayer
 
 public:
 	EntitiesLayer() = default;
-	~EntitiesLayer() = default;
+	virtual ~EntitiesLayer() = default;
 
 	void Update() override;
 	void Draw() override;
 
 	string GetName() const override;
-	void PushEntity(const shared_ptr<Entity>& entity);
+	void PushEntity(shared_ptr<Entity> entity);
 };

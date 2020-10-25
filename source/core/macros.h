@@ -6,3 +6,4 @@
 #define PATH_LEVELS "resources/levels/"
 
 #define PATH_SETTINGS "resources/configs/settings.ini"
+#define PATH_ANIMATIONS "resources/configs/animations/"
