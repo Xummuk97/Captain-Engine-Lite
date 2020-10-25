@@ -4,7 +4,7 @@ int main()
 {
     try
     {
-        Core c("Captain Engine Lite 1.0", 800, 600);
+        Core c;
         auto txt = make_shared<TextureResource>("test1.png");
         Core::resourceManagerInstance.Set("test", txt);
 

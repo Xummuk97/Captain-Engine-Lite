@@ -5,15 +5,31 @@ ResourceManager										Core::resourceManagerInstance;
 Level												Core::levelInstance;
 Space												Core::spaceInstance;
 
-sf::RenderWindow*									Core::windowInstance;
+unique_ptr<sf::RenderWindow>						Core::windowInstance;
+unique_ptr<INIReader>								Core::readerInstance;
+
 float												Core::deltaTimeInstance;
 
-Core::Core(const string& title, int width, int height)
+Core::Core()
 {
-	windowInstance = new sf::RenderWindow(sf::VideoMode(width, height), title);
+	readerInstance = make_unique<INIReader>(PATH_SETTINGS);
+
+	long width = readerInstance->GetInteger("core", "width", 800);
+	long height = readerInstance->GetInteger("core", "height", 600);
+	string title = readerInstance->GetString("core", "title", "Game");
+	bool isFullscreen = readerInstance->GetBoolean("core", "fullscreen", false);
+	windowInstance = make_unique<sf::RenderWindow>(sf::VideoMode(width, height), title, isFullscreen ? sf::Style::Fullscreen : sf::Style::Default);
+	
+	long fps = readerInstance->GetInteger("core", "fps", 60);
+	bool isVerticalSync = readerInstance->GetBoolean("core", "vertical_sync", false);
+	windowInstance->setFramerateLimit(fps);
+	windowInstance->setVerticalSyncEnabled(isVerticalSync);
+
 	ImGui::SFML::Init(*windowInstance);
 
-	spaceInstance.setGravity(Vect(0, 100));
+	long gravity_x = readerInstance->GetInteger("game", "gravity_x", 0);
+	long gravity_y = readerInstance->GetInteger("game", "gravity_y", 100);
+	spaceInstance.setGravity(Vect(gravity_x, gravity_y));
 }
 
 void Core::Start()
@@ -30,6 +46,13 @@ void Core::Start()
 			if (event.type == sf::Event::Closed)
 			{
 				windowInstance->close();
+			}
+			else if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Escape)
+				{
+					windowInstance->close();
+				}
 			}
 		}
 

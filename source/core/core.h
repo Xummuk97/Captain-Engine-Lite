@@ -6,7 +6,7 @@
 class Core
 {
 public:
-	Core(const string& title, int width, int height);
+	Core();
 	virtual ~Core() = default;
 
 	void Start();
@@ -15,7 +15,8 @@ public:
 	static Level levelInstance;
 	static Space spaceInstance;
 
-	static sf::RenderWindow* windowInstance;
+	static unique_ptr<sf::RenderWindow> windowInstance;
+	static unique_ptr<INIReader> readerInstance;
 
 	static float deltaTimeInstance;
 };
