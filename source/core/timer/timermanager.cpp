@@ -6,6 +6,21 @@ void TimerManager::Add(const string& name, shared_ptr<Timer>& timer)
 	timer.reset();
 }
 
+bool TimerManager::Has(const string& name)
+{
+	return _timers.find(name) != _timers.end();
+}
+
+void TimerManager::Remove(const string& name)
+{
+	if (!Has(name))
+	{
+		throw "[TimerManager::Remove] Error: Timer '" + name + "' not found.";
+	}
+
+	_timers.erase(name);
+}
+
 void TimerManager::Update()
 {
 	for (auto it = _timers.begin(); it != _timers.end();)

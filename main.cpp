@@ -6,21 +6,21 @@ int main()
     {
         Core c;
 
-        auto timer = make_shared<Timer>(2.0f, [](Timer& timer) {
-            cout << "TIMER 2.0F!!!" << endl;
-        }, TIMER_REPEAT);
-        Core::timerManagerInstance.Add("test1", timer);
-
         Core::resourceManagerInstance.Set("test", make_shared<TextureResource>("test1.png"));
 
         shared_ptr<ILayer> lvl = make_shared<EntitiesLayer>();
         Core::levelInstance.PushLayer("test", lvl);
 
-        weak_ptr<ILayer> newLayer = Core::levelInstance.GetLayer("test");
         auto ent = make_shared<Entity>("test");
-        newLayer.lock()->PushEntity(ent);
+        AnimationManager& animationManager = ent->GetAnimationManager();
+        Frames& frame1 = animationManager.Add("frame1", 1.0f);
+        frame1.AddFrame({ 0, 0, 16, 16 });
+        frame1.AddFrame({ 0, 0, 32, 32 });
 
-        Core::levelInstance.RemoveLayer("test");
+        animationManager.SetNameCurrentFrames("frame1");
+
+        ILayer& newLayer = Core::levelInstance.GetLayer("test");
+        newLayer.PushEntity(ent);
 
         c.Start();
     }

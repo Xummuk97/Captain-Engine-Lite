@@ -1,7 +1,13 @@
 #include "entity.h"
 #include <core/core.h>
 
+Entity::Entity()
+    : _animationManager(_sprite)
+{
+}
+
 Entity::Entity(const string& name)
+    : Entity()
 {
     SetTexture(name);
 }
@@ -14,6 +20,11 @@ string Entity::GetType() const
 string Entity::GetTag() const
 {
     return _tag;
+}
+
+AnimationManager& Entity::GetAnimationManager()
+{
+    return _animationManager;
 }
 
 void Entity::SetTexture(const string& name)

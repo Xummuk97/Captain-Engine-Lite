@@ -30,14 +30,14 @@ void Level::RemoveLayer(const string& name)
 	}
 }
 
-weak_ptr<ILayer> Level::GetLayer(const string& name)
+ILayer& Level::GetLayer(const string& name)
 {
 	if (!HasLayer(name))
 	{
 		throw "[Level::PushEntity] Error: Layer '" + name + "' not found.";
 	}
 	
-	return _layers[name];
+	return *_layers[name];
 }
 
 void Level::Update()

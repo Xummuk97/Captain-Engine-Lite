@@ -1,15 +1,17 @@
 #pragma once
 #include <core/includes.h>
+#include <core/entities/animation.h>
 
 class Entity
 {
 	sf::Sprite _sprite;
 	string _tag;
+	AnimationManager _animationManager;
 
 public:
-	Entity() = default;
+	Entity();
 	Entity(const string& name);
-	virtual ~Entity() {cout << "DELETE ENTITY" << endl;};
+	virtual ~Entity() = default;
 
 	void SetTexture(const string& name);
 	void SetTextureRect(const sf::IntRect& rect);
@@ -25,6 +27,8 @@ public:
 
 	virtual string GetType() const;
 	string GetTag() const;
+
+	AnimationManager& GetAnimationManager();
 
 	virtual void Update();
 	virtual void Draw();

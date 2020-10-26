@@ -6,7 +6,7 @@ class ILayer
 {
 public:
 	ILayer() = default;
-	virtual ~ILayer() { cout << "DELETE LAYER" << endl; };
+	virtual ~ILayer() = default;
 
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
