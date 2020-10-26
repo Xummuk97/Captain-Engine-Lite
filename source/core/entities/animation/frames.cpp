@@ -3,6 +3,18 @@
 
 #define PREFIX "timer_"
 
+void Frames::ChangeFrame()
+{
+	_sprite.setTextureRect(_data[_frameCount]);
+
+	_frameCount++;
+
+	if (_frameCount >= _data.size())
+	{
+		_frameCount = 0;
+	}
+}
+
 Frames::Frames(const string& name, sf::Sprite& sprite, float delay)
 	: _delay(delay)
 	, _sprite(sprite)
@@ -15,6 +27,11 @@ Frames::Frames(const string& name, sf::Sprite& sprite, float delay)
 void Frames::AddFrame(const sf::IntRect& rect)
 {
 	_data.push_back(rect);
+
+	if (_data.size() == 1)
+	{
+		ChangeFrame();
+	}
 }
 
 int Frames::GetFlags() const
@@ -31,14 +48,7 @@ void Frames::Start()
 
 	auto timer = make_shared<Timer>(_delay, [this](Timer& timer)
 	{
-		_sprite.setTextureRect(_data[_frameCount]);
-
-		_frameCount++;
-
-		if (_frameCount >= _data.size())
-		{
-			_frameCount = 0;
-		}
+		ChangeFrame();
 	}, TIMER_REPEAT);
 	Core::timerManagerInstance.Add(PREFIX + _name, timer);
 }

@@ -12,12 +12,7 @@ int main()
         Core::levelInstance.PushLayer("test", lvl);
 
         auto ent = make_shared<Entity>("test");
-        AnimationManager& animationManager = ent->GetAnimationManager();
-        Frames& frame1 = animationManager.Add("frame1", 1.0f);
-        frame1.AddFrame({ 0, 0, 16, 16 });
-        frame1.AddFrame({ 0, 0, 32, 32 });
-
-        animationManager.SetNameCurrentFrames("frame1");
+        ent->AddComponent("drawable", make_shared<DrawableComponent>());
 
         ILayer& newLayer = Core::levelInstance.GetLayer("test");
         newLayer.PushEntity(ent);

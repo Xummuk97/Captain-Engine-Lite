@@ -3,6 +3,7 @@
 #include <core/level.h>
 #include <core/resources/resource.h>
 #include <core/timer/timer.h>
+#include <core/entities/components/drawable.h>
 
 class Core
 {

@@ -1,12 +1,11 @@
 #pragma once
 #include <core/includes.h>
-#include <core/entities/animation.h>
+#include <core/entities/components/components.h>
 
-class Entity
+class Entity : public ComponentsManager<Entity>
 {
-	sf::Sprite _sprite;
 	string _tag;
-	AnimationManager _animationManager;
+	sf::Sprite _sprite;
 
 public:
 	Entity();
@@ -28,7 +27,7 @@ public:
 	virtual string GetType() const;
 	string GetTag() const;
 
-	AnimationManager& GetAnimationManager();
+	sf::Sprite& GetSprite();
 
 	virtual void Update();
 	virtual void Draw();
@@ -43,8 +42,6 @@ public:
 	CPEntity(Float mass, Float inertia);
 	CPEntity(Float mass, Float inertia, const string& name);
 	virtual ~CPEntity();
-
-	shared_ptr<Body> GetBody() { return _body; }
 
 	virtual string GetType() const;
 

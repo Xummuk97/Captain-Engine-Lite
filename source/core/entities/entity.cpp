@@ -2,7 +2,7 @@
 #include <core/core.h>
 
 Entity::Entity()
-    : _animationManager(_sprite)
+    : ComponentsManager(*this)
 {
 }
 
@@ -22,9 +22,9 @@ string Entity::GetTag() const
     return _tag;
 }
 
-AnimationManager& Entity::GetAnimationManager()
+sf::Sprite& Entity::GetSprite()
 {
-    return _animationManager;
+    return _sprite;
 }
 
 void Entity::SetTexture(const string& name)
@@ -74,37 +74,10 @@ void Entity::SetTag(const string& tag)
 
 void Entity::Update()
 {
+    UpdateComponents();
 }
 
 void Entity::Draw()
 {
-    Core::windowInstance->draw(_sprite);
-}
-
-CPEntity::CPEntity(Float mass, Float inertia)
-    : _body(make_shared<Body>(mass, inertia))
-{
-    Core::spaceInstance.add(_body);
-}
-
-CPEntity::CPEntity(Float mass, Float inertia, const string& name)
-    : CPEntity(mass, inertia)
-{
-    SetTexture(name);
-}
-
-CPEntity::~CPEntity()
-{
-    Core::spaceInstance.remove(_body);
-}
-
-string CPEntity::GetType() const
-{
-    return "CPEntity";
-}
-
-void CPEntity::Update()
-{
-    Vect position = _body->getPosition();
-    SetPosition({ (float)position.x, (float)position.y });
+    DrawComponents();
 }

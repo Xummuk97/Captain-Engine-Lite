@@ -13,6 +13,8 @@ class Frames
 	string _name;
 	size_t _frameCount;
 
+	void ChangeFrame();
+
 public:
 	Frames(const string& name, sf::Sprite& sprite, float delay);
 	virtual ~Frames() = default;
