@@ -8,6 +8,7 @@ public:
 	DrawableComponent() = default;
 	virtual ~DrawableComponent() = default;
 
+	void Load(Entity& object) override;
 	void Update(Entity& object) override;
 	void Draw(Entity& object) override;
 };

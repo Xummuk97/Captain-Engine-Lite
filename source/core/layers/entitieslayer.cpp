@@ -10,7 +10,7 @@ void EntitiesLayer::Update()
 {
 	for (auto entity : _entities)
 	{
-		entity->Update();
+		entity->UpdateComponents();
 	}
 }
 
@@ -18,7 +18,7 @@ void EntitiesLayer::Draw()
 {
 	for (auto entity : _entities)
 	{
-		entity->Draw();
+		entity->DrawComponents();
 	}
 }
 

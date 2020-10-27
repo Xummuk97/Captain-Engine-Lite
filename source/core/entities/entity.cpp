@@ -1,20 +1,27 @@
 #include "entity.h"
 #include <core/core.h>
 
-Entity::Entity()
+Entity::Entity(const string& type)
     : ComponentsManager(*this)
+    , _type(type)
 {
 }
 
-Entity::Entity(const string& name)
-    : Entity()
+Entity::Entity(const string& type, const string& textureName)
+    : Entity(type)
 {
-    SetTexture(name);
+    SetTexture(textureName);
+}
+
+Entity::Entity(const string& type, const string& tag, const string& textureName)
+    : Entity(type, textureName)
+{
+    _tag = tag;
 }
 
 string Entity::GetType() const
 {
-    return "Entity";
+    return _type;
 }
 
 string Entity::GetTag() const
@@ -65,19 +72,4 @@ bool Entity::IsContains(const sf::Vector2f& point)
 bool Entity::IsIntersects(const sf::FloatRect& rect)
 {
     return _sprite.getGlobalBounds().intersects(rect);
-}
-
-void Entity::SetTag(const string& tag)
-{
-    _tag = tag;
-}
-
-void Entity::Update()
-{
-    UpdateComponents();
-}
-
-void Entity::Draw()
-{
-    DrawComponents();
 }

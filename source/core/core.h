@@ -2,8 +2,8 @@
 #include <core/includes.h>
 #include <core/level.h>
 #include <core/resources/resource.h>
-#include <core/timer/timer.h>
 #include <core/entities/components/drawable.h>
+#include <core/entities/components/animation/animation.h>
 
 class Core
 {
@@ -14,7 +14,6 @@ public:
 	void Start();
 
 	static ResourceManager resourceManagerInstance;
-	static TimerManager timerManagerInstance;
 
 	static Level levelInstance;
 	static Space spaceInstance;

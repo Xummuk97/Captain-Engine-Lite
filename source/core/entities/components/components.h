@@ -8,6 +8,7 @@ public:
 	IComponent() = default;
 	virtual ~IComponent() = default;
 
+	virtual void Load(T& object) = 0;
 	virtual void Update(T& object) = 0;
 	virtual void Draw(T& object) = 0;
 };
@@ -25,6 +26,7 @@ public:
 	void AddComponent(const string& name, const shared_ptr<IComponent<T>>& component)
 	{
 		_data[name] = component;
+		_data[name]->Load(_object);
 	}
 
 	void UpdateComponents()

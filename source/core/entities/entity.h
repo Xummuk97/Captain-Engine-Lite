@@ -4,12 +4,14 @@
 
 class Entity : public ComponentsManager<Entity>
 {
+	string _type;
 	string _tag;
 	sf::Sprite _sprite;
 
 public:
-	Entity();
-	Entity(const string& name);
+	Entity(const string& type);
+	Entity(const string& type, const string& textureName);
+	Entity(const string& type, const string& tag, const string& textureName);
 	virtual ~Entity() = default;
 
 	void SetTexture(const string& name);
@@ -22,28 +24,8 @@ public:
 	bool IsContains(const sf::Vector2f& point);
 	bool IsIntersects(const sf::FloatRect& rect);
 
-	void SetTag(const string& tag);
-
-	virtual string GetType() const;
+	string GetType() const;
 	string GetTag() const;
 
 	sf::Sprite& GetSprite();
-
-	virtual void Update();
-	virtual void Draw();
-};
-
-class CPEntity : public Entity 
-{
-protected:
-	shared_ptr<Body> _body;
-
-public:
-	CPEntity(Float mass, Float inertia);
-	CPEntity(Float mass, Float inertia, const string& name);
-	virtual ~CPEntity();
-
-	virtual string GetType() const;
-
-	virtual void Update();
 };
