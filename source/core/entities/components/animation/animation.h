@@ -46,4 +46,6 @@ public:
 	void AddFrame(const string& name, shared_ptr<Frames>& frames);
 	void SetCurrentFrames(const string& name);
 	Frames& GetCurrentFrames();
+
+	void LoadFromFile(const string& path);
 };
