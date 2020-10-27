@@ -8,9 +8,11 @@ void AnimationComponent::Load(Entity& object)
 void AnimationComponent::Update(Entity& object)
 {
 	Frames& currentFrame = GetCurrentFrames();
+	bool isBegin = currentFrame.IsBegin();
+
 	currentFrame.Update();
 
-	if (currentFrame.IsStart() && currentFrame.IsChangeFrame())
+	if (isBegin || (currentFrame.IsRun() && currentFrame.IsChangeFrame()))
 	{
 		object.GetSprite().setTextureRect(currentFrame.GetRectCurrentFrame());
 	}
@@ -20,13 +22,13 @@ void AnimationComponent::Draw(Entity& object)
 {
 }
 
-void AnimationComponent::AddFrame(const string& name, shared_ptr<Frames>& frames)
+void AnimationComponent::AddFrames(const string& name, shared_ptr<Frames>& frames)
 {
 	_frames[name] = frames;
 	frames.reset();
 }
 
-void AnimationComponent::SetCurrentFrames(const string& name)
+void AnimationComponent::Run(const string& name)
 {
 	if (_currentFrames != "")
 	{
@@ -34,7 +36,7 @@ void AnimationComponent::SetCurrentFrames(const string& name)
 	}
 
 	_currentFrames = name;
-	GetCurrentFrames().Start();
+	GetCurrentFrames().Run();
 }
 
 Frames& AnimationComponent::GetCurrentFrames()
@@ -76,10 +78,10 @@ void AnimationComponent::LoadFromFile(const string& path)
 			frame = frame->NextSiblingElement("frame");
 		}
 
-		AddFrame(name, frameInstance);
+		AddFrames(name, frameInstance);
 
 		frames = frames->NextSiblingElement("frames");
 	}
 
-	SetCurrentFrames(def);
+	Run(def);
 }

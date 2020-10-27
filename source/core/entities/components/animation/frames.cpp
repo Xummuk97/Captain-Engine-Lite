@@ -5,8 +5,7 @@ Frames::Frames(float delay)
 	: _delay(delay)
 	, _currentFrame(0)
 	, _time(0.0f)
-	, _isFlip(false)
-	, _isStart(false)
+	, _flags(0)
 {
 }
 
@@ -20,55 +19,65 @@ sf::IntRect Frames::GetRectCurrentFrame() const
 	return _frames[_currentFrame];
 }
 
-void Frames::Start()
+void Frames::Run()
 {
-	_isStart = true;
+	_flags |= (FRAMES_RUN | FRAMES_BEGIN);
 }
 
 void Frames::Stop()
 {
-	_isStart = false;
+	_flags ^= FRAMES_RUN;
 	_time = 0.0f;
 	_currentFrame = 0;
 }
 
 void Frames::Flip()
 {
-	if (_isFlip)
+	if (IsFlip())
 	{
-		_isFlip = false;
+		_flags ^= FRAMES_FLIP;
 	}
 	else
 	{
-		_isFlip = true;
+		_flags |= FRAMES_FLIP;
 	}
 }
 
-bool Frames::IsStart() const
+bool Frames::IsRun() const
 {
-	return _isStart;
+	return _flags & FRAMES_RUN;
 }
 
 bool Frames::IsFlip() const
 {
-	return _isFlip;
+	return _flags & FRAMES_FLIP;
 }
 
 bool Frames::IsChangeFrame() const
 {
-	return _isChangeFrame;
+	return _flags & FRAMES_CHAGE_FRAME;
+}
+
+bool Frames::IsBegin() const
+{
+	return _flags & FRAMES_BEGIN;
 }
 
 void Frames::Update()
 {
-	if (!_isStart)
+	if (!IsRun())
 	{
 		return;
 	}
 
-	if (_isChangeFrame)
+	if (IsChangeFrame())
 	{
-		_isChangeFrame = false;
+		_flags ^= FRAMES_CHAGE_FRAME;
+	}
+
+	if (IsBegin())
+	{
+		_flags ^= FRAMES_BEGIN;
 	}
 
 	_time += Core::deltaTimeInstance;
@@ -78,7 +87,7 @@ void Frames::Update()
 		_time = 0.0f;
 
 		_currentFrame++;
-		_isChangeFrame = true;
+		_flags |= FRAMES_CHAGE_FRAME;
 
 		if (_currentFrame >= _frames.size())
 		{

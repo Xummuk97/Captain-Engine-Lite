@@ -29,6 +29,11 @@ public:
 		_data[name]->Load(_object);
 	}
 
+	IComponent<T>& GetComponent(const string& name)
+	{
+		return *_data[name];
+	}
+
 	void UpdateComponents()
 	{
 		for (auto [name, component] : _data)

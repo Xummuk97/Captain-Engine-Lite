@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<animation default="test">
-  <frames name="test" delay="0.25">
+<animation default="a">
+  <frames name="a" delay="1.25">
     <frame x="0" y="0" width="16" height="16" />
     <frame x="32" y="0" width="32" height="32" />
   </frames>
-  <frames name="run" delay="0.25">
-    <frame x="0" y="0" width="6" height="6" />
-    <frame x="32" y="0" width="32" height="32" />
+  <frames name="b" delay="0.25">
+    <frame x="0" y="0" width="22" height="6" />
+    <frame x="32" y="0" width="6" height="22" />
   </frames>
 </animation>
